@@ -7,7 +7,7 @@ using System.Web;
 namespace Hotel_Tamagotchi.Models.ValidationAttributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class PositiveNumberValidator : ValidationAttribute
+    public class AgeValidator : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

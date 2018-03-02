@@ -15,9 +15,9 @@ namespace Hotel_Tamagotchi.Models
         [StringLength(10)]
         public string Name { get; set; }
         [Required]
-        [PositiveNumberValidator]
+        [AgeValidator]
         public int Age { get; set; }
-        [PositiveNumberValidator]
+        [AgeValidator]
         public int Cents { get; set; }
         [Range(0, 100)]
         public int Health { get; set; }
