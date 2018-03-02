@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel_Tamagotchi.Models.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,17 +11,20 @@ namespace Hotel_Tamagotchi.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The name must have a length no more than 10 characters")]
         [StringLength(10)]
         public string Name { get; set; }
-        int Age { get; set; }
-        //[]
-        int Cents { get; set; }
+        [Required]
+        public int Age { get; set; }
+        [AgeValidator]
+        public int Cents { get; set; }
         [Range(0, 100)]
-        int Health { get; set; }
+        public int Health { get; set; }
+        [Required]
         [Range(0, 100)]
-        int Boredom { get; set; }
-        bool Alive { get; set; }
+        public int Boredom { get; set; }
+        [Required]
+        public bool Alive { get; set; }
 
         public Tamagotchi()
         {
