@@ -15,8 +15,9 @@ namespace Hotel_Tamagotchi.Models
         [StringLength(10)]
         public string Name { get; set; }
         [Required]
+        [PositiveNumberValidator]
         public int Age { get; set; }
-        [AgeValidator]
+        [PositiveNumberValidator]
         public int Cents { get; set; }
         [Range(0, 100)]
         public int Health { get; set; }
@@ -31,7 +32,6 @@ namespace Hotel_Tamagotchi.Models
             Age = 0;
             Cents = 100;
             Boredom = 0;
-            Alive = true;
         }
     }
 }
