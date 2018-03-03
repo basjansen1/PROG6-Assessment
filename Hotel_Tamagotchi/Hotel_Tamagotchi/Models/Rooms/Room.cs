@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Hotel_Tamagotchi.Models
 {
-    public class Room
+    public class Room : NightObject
     {
         [Key]
         public int ID { get; set; }
@@ -17,5 +17,10 @@ namespace Hotel_Tamagotchi.Models
         [Required]
         public string Type { get; set; }
         public List<Tamagotchi>TamagotchiList { get; set; }
+
+        public void DoNight()
+        {
+
+        }
     }
 }

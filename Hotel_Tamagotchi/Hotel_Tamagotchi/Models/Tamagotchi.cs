@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Hotel_Tamagotchi.Models
 {
-    public class Tamagotchi
+    public class Tamagotchi : NightObject
     {
         [Key]
         public int ID { get; set; }
@@ -33,6 +33,11 @@ namespace Hotel_Tamagotchi.Models
             Age = 0;
             Cents = 100;
             Boredom = 0;
+        }
+
+        public void DoNight()
+        {
+
         }
     }
 }
