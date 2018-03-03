@@ -153,7 +153,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
