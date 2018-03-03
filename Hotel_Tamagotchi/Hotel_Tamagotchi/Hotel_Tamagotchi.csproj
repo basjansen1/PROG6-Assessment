@@ -157,6 +157,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\RoomType.cs" />
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
     <Compile Include="Models\ValidationAttributes\RoomSizeValidator.cs" />
