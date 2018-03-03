@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel_Tamagotchi.Models.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Hotel_Tamagotchi.Models
         [Key]
         public int ID { get; set; }
         [Required]
+        [RoomSizeValidator]
         public int Size { get; set; }
         [Required]
         public string Type { get; set; }
