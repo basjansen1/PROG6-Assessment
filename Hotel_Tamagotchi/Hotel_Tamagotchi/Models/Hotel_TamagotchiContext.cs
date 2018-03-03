@@ -20,5 +20,7 @@ namespace Hotel_Tamagotchi.Models
         }
 
         public System.Data.Entity.DbSet<Hotel_Tamagotchi.Models.Tamagotchi> Tamagotchis { get; set; }
+
+        public System.Data.Entity.DbSet<Hotel_Tamagotchi.Models.Room> Rooms { get; set; }
     }
 }

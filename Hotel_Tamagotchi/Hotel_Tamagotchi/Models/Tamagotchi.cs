@@ -26,6 +26,7 @@ namespace Hotel_Tamagotchi.Models
         public int Boredom { get; set; }
         [Required]
         public bool Alive { get; set; }
+        public Room CurrentRoom { get; set; }
 
         public Tamagotchi()
         {
