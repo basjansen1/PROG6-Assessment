@@ -36,15 +36,15 @@ namespace Hotel_Tamagotchi.Models.ViewModels
                 _room.Type = value;
             }
         }
-        public List<Tamagotchi> TamagotchiList
+        public List<TamagotchiViewModel> TamagotchiList
         {
             get
             {
-                return _room.TamagotchiList;
+                return _room.TamagotchiList.Select(t => new TamagotchiViewModel(t)).ToList();
             }
             set
             {
-                _room.TamagotchiList = value;
+                _room.TamagotchiList = value.Select(t => t.ToModel()).ToList();
             }
         }
         public RoomViewModel()
