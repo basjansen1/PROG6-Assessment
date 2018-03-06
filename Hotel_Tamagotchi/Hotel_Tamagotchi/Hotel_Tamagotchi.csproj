@@ -156,11 +156,17 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
+    <Compile Include="Models\Repositories\IRepository.cs" />
+    <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="Models\Repositories\RoomRepository.cs" />
+    <Compile Include="Models\Repositories\TamagotchiRepository.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomType.cs" />
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
     <Compile Include="Models\ValidationAttributes\RoomSizeValidator.cs" />
+    <Compile Include="Models\ViewModels\RoomViewModel.cs" />
+    <Compile Include="Models\ViewModels\TamagotchiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
