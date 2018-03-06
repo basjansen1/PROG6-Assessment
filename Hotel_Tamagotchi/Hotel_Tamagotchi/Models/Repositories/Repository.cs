@@ -14,7 +14,7 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
             this._context = context;
         }
-        public abstract void Create(T model);
+        public abstract void Add(T model);
         public abstract void Delete(T model);
         public abstract T Get(int id);
         public abstract List<T> GetAll();

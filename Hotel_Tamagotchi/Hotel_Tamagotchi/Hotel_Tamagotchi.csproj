@@ -165,6 +165,8 @@
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
     <Compile Include="Models\ValidationAttributes\RoomSizeValidator.cs" />
+    <Compile Include="Models\ViewModels\RoomViewModel.cs" />
+    <Compile Include="Models\ViewModels\TamagotchiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -58,5 +58,10 @@ namespace Hotel_Tamagotchi.Models.ViewModels
         }
 
         private Room _room;
+
+        public Room ToModel()
+        {
+            return _room;
+        }
     }
 }
