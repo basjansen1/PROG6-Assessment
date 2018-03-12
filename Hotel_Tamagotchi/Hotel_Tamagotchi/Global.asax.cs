@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel_Tamagotchi.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,7 @@ namespace Hotel_Tamagotchi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ControllerBuilder.Current.SetControllerFactory(typeof(NinjectControllerFactory));
         }
     }
 }
