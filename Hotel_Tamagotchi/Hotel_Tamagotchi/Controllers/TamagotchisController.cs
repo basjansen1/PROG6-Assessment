@@ -13,15 +13,15 @@ namespace Hotel_Tamagotchi.Controllers
 {
     public class TamagotchisController : Controller
     {
-        //Repository tamagotchiRepository;
+        private ITamagotchiRepository _tamagotchiRepository;
         public TamagotchisController()
         {
 
         }
 
-        public TamagotchisController(TamagotchiRepository tamagotchiRepository)
+        public TamagotchisController(ITamagotchiRepository tamagotchiRepository)
         {
-
+            _tamagotchiRepository = tamagotchiRepository;
         }
         private Hotel_TamagotchiContext db = new Hotel_TamagotchiContext();
 

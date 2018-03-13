@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hotel_Tamagotchi.Models.Repositories
 {
-    interface ITamagotchiRepository : IRepository<TamagotchiViewModel>
+    public interface ITamagotchiRepository : IRepository<TamagotchiViewModel>
     {
     }
 }
