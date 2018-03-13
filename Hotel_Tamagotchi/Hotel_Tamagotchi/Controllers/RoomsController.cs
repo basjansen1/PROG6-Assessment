@@ -14,7 +14,6 @@ namespace Hotel_Tamagotchi.Controllers
     public class RoomsController : Controller
     {
         private IRoomRepository _roomRepository;
-        private Hotel_TamagotchiContext db = new Hotel_TamagotchiContext();
 
         public RoomsController()
         {
@@ -29,7 +28,7 @@ namespace Hotel_Tamagotchi.Controllers
         // GET: Rooms
         public ActionResult Index()
         {
-            return View(db.Rooms.ToList());
+            return View(_roomRepository.GetAll());
         }
 
         // GET: Rooms/Details/5
@@ -39,7 +38,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -62,8 +61,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Rooms.Add(room);
-                db.SaveChanges();
+                _roomRepository.Add(room);
                 return RedirectToAction("Index");
             }
 
@@ -77,7 +75,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -94,8 +92,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(room).State = EntityState.Modified;
-                db.SaveChanges();
+                _roomRepository.Update(room);
                 return RedirectToAction("Index");
             }
             return View(room);
@@ -108,7 +105,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -121,9 +118,8 @@ namespace Hotel_Tamagotchi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Room room = db.Rooms.Find(id);
-            db.Rooms.Remove(room);
-            db.SaveChanges();
+            Room room = _roomRepository.Get(id);
+            _roomRepository.Delete(room);
             return RedirectToAction("Index");
         }
 
@@ -131,7 +127,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }
