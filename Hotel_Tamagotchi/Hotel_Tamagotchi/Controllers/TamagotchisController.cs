@@ -7,11 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hotel_Tamagotchi.Models;
+using Hotel_Tamagotchi.Models.Repositories;
 
 namespace Hotel_Tamagotchi.Controllers
 {
     public class TamagotchisController : Controller
     {
+        //Repository tamagotchiRepository;
+        public TamagotchisController()
+        {
+
+        }
+
+        public TamagotchisController(TamagotchiRepository tamagotchiRepository)
+        {
+
+        }
         private Hotel_TamagotchiContext db = new Hotel_TamagotchiContext();
 
         // GET: Tamagotchis

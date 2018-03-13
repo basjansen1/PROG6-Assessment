@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hotel_Tamagotchi.Models.Repositories
 {
-    interface IRepository <T>
+    interface IRepository <T> // Delete this interface
     {
         T Get(int id);
         List<T> GetAll();

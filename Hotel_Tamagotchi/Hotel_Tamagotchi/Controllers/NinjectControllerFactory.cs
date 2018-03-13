@@ -30,11 +30,14 @@ namespace Hotel_Tamagotchi.Controllers
             // Binding controllers
             _kernel.Bind<IController>().To<HomeController>();
             _kernel.Bind<IController>().To<RoomsController>();
+            _kernel.Bind<IController>().To<TamagotchisController>();
         }
 
         public IController CreateController(RequestContext requestContext, string controllerName)
         {
-            throw new NotImplementedException();
+            if (controllerName == "Tamagotchis")
+                return _kernel.Get<TamagotchisController>();
+            return null;
         }
 
         public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
