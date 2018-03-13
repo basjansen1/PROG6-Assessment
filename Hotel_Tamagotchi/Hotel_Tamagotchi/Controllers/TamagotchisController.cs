@@ -16,19 +16,17 @@ namespace Hotel_Tamagotchi.Controllers
         private ITamagotchiRepository _tamagotchiRepository;
         public TamagotchisController()
         {
-
         }
 
         public TamagotchisController(ITamagotchiRepository tamagotchiRepository)
         {
             _tamagotchiRepository = tamagotchiRepository;
         }
-        private Hotel_TamagotchiContext db = new Hotel_TamagotchiContext();
 
         // GET: Tamagotchis
         public ActionResult Index()
         {
-            return View(db.Tamagotchis.ToList());
+            return View(_tamagotchiRepository.GetAll());
         }
 
         // GET: Tamagotchis/Details/5
@@ -38,7 +36,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tamagotchi tamagotchi = db.Tamagotchis.Find(id);
+            Tamagotchi tamagotchi = _tamagotchiRepository.Get((int) id);
             if (tamagotchi == null)
             {
                 return HttpNotFound();
@@ -61,8 +59,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Tamagotchis.Add(tamagotchi);
-                db.SaveChanges();
+                _tamagotchiRepository.Add(tamagotchi);
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +73,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tamagotchi tamagotchi = db.Tamagotchis.Find(id);
+            Tamagotchi tamagotchi = _tamagotchiRepository.Get((int) id);
             if (tamagotchi == null)
             {
                 return HttpNotFound();
@@ -93,8 +90,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tamagotchi).State = EntityState.Modified;
-                db.SaveChanges();
+                _tamagotchiRepository.Update(tamagotchi);
                 return RedirectToAction("Index");
             }
             return View(tamagotchi);
@@ -107,7 +103,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tamagotchi tamagotchi = db.Tamagotchis.Find(id);
+            Tamagotchi tamagotchi = _tamagotchiRepository.Get((int) id);
             if (tamagotchi == null)
             {
                 return HttpNotFound();
@@ -120,9 +116,8 @@ namespace Hotel_Tamagotchi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tamagotchi tamagotchi = db.Tamagotchis.Find(id);
-            db.Tamagotchis.Remove(tamagotchi);
-            db.SaveChanges();
+            Tamagotchi tamagotchi = _tamagotchiRepository.Get(id);
+            _tamagotchiRepository.Delete(tamagotchi);
             return RedirectToAction("Index");
         }
 
@@ -130,7 +125,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }

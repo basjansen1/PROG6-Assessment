@@ -14,5 +14,10 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
             this._context = context;
         }
+
+        ~Repository()
+        {
+            _context.Dispose();
+        }
     }
 }
