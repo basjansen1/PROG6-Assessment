@@ -9,6 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<h2>Alive Tamagotchis</h2>
 <table class="table">
     <tr>
         <th>
@@ -32,7 +33,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Where(t => t.Alive == true)) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -59,5 +60,60 @@
         </td>
     </tr>
 }
+
+</table>
+
+<h2>Dead Tamagotchis</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Health)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Boredom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(t => t.Alive == false))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cents)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Health)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Boredom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
