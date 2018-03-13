@@ -24,8 +24,8 @@ namespace Hotel_Tamagotchi.Controllers
         {
             // Binding models
             _kernel.Bind<Hotel_TamagotchiContext>().ToSelf();
-            _kernel.Bind<RoomRepository>().ToSelf();
-            _kernel.Bind<TamagotchiRepository>().ToSelf();
+            _kernel.Bind<IRoomRepository>().To<RoomRepository>();
+            _kernel.Bind<ITamagotchiRepository>().To<TamagotchiRepository>();
 
             // Binding controllers
             _kernel.Bind<IController>().To<HomeController>();
@@ -35,9 +35,15 @@ namespace Hotel_Tamagotchi.Controllers
 
         public IController CreateController(RequestContext requestContext, string controllerName)
         {
-            if (controllerName == "Tamagotchis")
-                return _kernel.Get<TamagotchisController>();
-            return null;
+            switch(controllerName)
+            {
+                case "Tamagotchis":
+                    return _kernel.Get<TamagotchisController>();
+                case "Rooms":
+                    return _kernel.Get<RoomsController>();
+                default:
+                    return _kernel.Get<TamagotchisController>();
+            }
         }
 
         public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)

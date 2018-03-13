@@ -7,12 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hotel_Tamagotchi.Models;
+using Hotel_Tamagotchi.Models.Repositories;
 
 namespace Hotel_Tamagotchi.Controllers
 {
     public class RoomsController : Controller
     {
+        private IRoomRepository _roomRepository;
         private Hotel_TamagotchiContext db = new Hotel_TamagotchiContext();
+
+        public RoomsController()
+        {
+
+        }
+
+        public RoomsController(IRoomRepository roomRepository)
+        {
+            this._roomRepository = roomRepository;
+        }
 
         // GET: Rooms
         public ActionResult Index()
