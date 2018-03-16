@@ -93,6 +93,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Alive)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentRoom.ID)
+        </th>
         <th></th>
     </tr>
 
@@ -116,6 +119,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Alive)
+            </td>
+            <td>
+                @if (item.CurrentRoom != null)
+                {
+                    @Html.DisplayFor(modelItem => item.CurrentRoom.ID)
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

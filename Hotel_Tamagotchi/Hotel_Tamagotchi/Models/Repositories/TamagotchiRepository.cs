@@ -27,7 +27,7 @@ namespace Hotel_Tamagotchi.Models.Repositories
 
         public Tamagotchi Get(int id)
         {
-            return this._context.Tamagotchis.Find(id);
+            return this._context.Tamagotchis.Include("CurrentRoom").Where(t => t.ID == id).First();
         }
 
         public List<Tamagotchi> GetAll()
