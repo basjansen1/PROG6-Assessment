@@ -16,6 +16,11 @@ namespace Hotel_Tamagotchi.Models
         public int Size { get; set; }
         [Required]
         public string Type { get; set; }
-        public List<Tamagotchi>TamagotchiList { get; set; }
+        public virtual List<Tamagotchi>TamagotchiList { get; set; }
+
+        public Room()
+        {
+            //TamagotchiList = new List<Tamagotchi>();
+        }
     }
 }

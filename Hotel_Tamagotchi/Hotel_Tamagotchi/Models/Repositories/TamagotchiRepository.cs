@@ -32,7 +32,7 @@ namespace Hotel_Tamagotchi.Models.Repositories
 
         public List<Tamagotchi> GetAll()
         {
-            return this._context.Tamagotchis.ToList();
+            return this._context.Tamagotchis.Include("CurrentRoom").ToList();
         }
 
         public void Update(Tamagotchi tamagotchi)

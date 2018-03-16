@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Hotel_Tamagotchi.Models.Room>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reservations</h2>
+
+@foreach (var room in Model.Where(r => r.TamagotchiList.Count != 0))
+{
+    <h3>@room.ID</h3>
+    foreach (var tamagotchi in room.TamagotchiList)
+    {
+        <p>@tamagotchi.Name</p>
+    }
+}
+
+<h2>Free rooms</h2>
+<table class="table">
+    <tr>
+        <th>
+            <p>Number</p>
+        </th>
+        <th>
+            <p>Reserve</p>
+        </th>
+    </tr>
+    @foreach (var room in Model.Where(r => r.TamagotchiList.Count == 0))
+    {
+        <tr>
+            <td>Room number @room.ID</td>
+            <td>Reserve</td>
+        </tr>
+    }
+
+</table>
