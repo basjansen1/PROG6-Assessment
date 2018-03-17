@@ -7,7 +7,7 @@ namespace Hotel_Tamagotchi.Models.Helpers
 {
     public class BookingData
     {
-        public int SelectedAmountOfTamagotchis { get; set; }
+        public int? SelectedAmountOfTamagotchis { get; set; }
         public Room SelectedRoom { get; set; }
         public List<int> AmountOfTamagotchisOptionList { get; set; }
 

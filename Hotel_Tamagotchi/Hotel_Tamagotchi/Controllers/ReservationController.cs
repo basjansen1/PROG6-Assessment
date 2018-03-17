@@ -3,6 +3,7 @@ using Hotel_Tamagotchi.Models.Helpers;
 using Hotel_Tamagotchi.Models.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +24,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             this._roomRepository = roomRepository;
             this._tamagotchiRepository = tamagotchiRepository;
+            Debug.WriteLine("In constructor");
         }
 
         // GET: Reservation
@@ -110,10 +112,12 @@ namespace Hotel_Tamagotchi.Controllers
         }
 
         // POST: Confirm 
-        public void ConfirmSelectAmount(int amountOfTamagotchis)
+        public void ConfirmSelectAmount()
         {
-           // this._selectedAmountOfTamagotchis = amountOfTamagotchis;
-            Redirect("SelectTamagotchis");
+           if (_bookingData.SelectedAmountOfTamagotchis == null)
+            {
+                Redirect("SelectTamagotchis");
+            }
         }
         public ActionResult SelectTamagotchis()
         {

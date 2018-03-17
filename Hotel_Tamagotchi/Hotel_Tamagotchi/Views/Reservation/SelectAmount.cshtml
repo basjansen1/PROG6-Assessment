@@ -8,7 +8,7 @@
 <h2>Step 1</h2>
 <p>Please select the amount of tamagotchis you would like to join the room:</p>
 <div class="col-md-10">
-    @Html.DropDownListFor(model => model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList), "Select type")
+    @Html.DropDownListFor(model => model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList), "")
 </div>
 <br />
-@Html.ActionLink("Next", "SelectTamagotchis")
+@Html.ActionLink("Next", "ConfirmSelectAmount")

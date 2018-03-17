@@ -31,7 +31,7 @@ namespace Hotel_Tamagotchi.Controllers
             _kernel.Bind<IController>().To<HomeController>();
             _kernel.Bind<IController>().To<RoomsController>();
             _kernel.Bind<IController>().To<TamagotchisController>();
-            _kernel.Bind<IController>().To<ReservationController>();
+            _kernel.Bind<IController>().To<ReservationController>().InSingletonScope();
         }
 
         public IController CreateController(RequestContext requestContext, string controllerName)
