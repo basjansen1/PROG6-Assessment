@@ -24,7 +24,6 @@ namespace Hotel_Tamagotchi.Controllers
         {
             this._roomRepository = roomRepository;
             this._tamagotchiRepository = tamagotchiRepository;
-            Debug.WriteLine("In constructor");
         }
 
         // GET: Reservation
@@ -40,14 +39,15 @@ namespace Hotel_Tamagotchi.Controllers
         }
 
         // GET: Reservation/Create
-        public ActionResult Create()
+        public ActionResult Create(int room_id)
         {
+            _bookingData = new BookingData(_roomRepository.Get(room_id));
             return View();
         }
 
         // POST: Reservation/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(BookingData bookingData)
         {
             try
             {
