@@ -178,6 +178,7 @@
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Repositories\TamagotchiRepository.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Helpers\RoomSizeOptions.cs" />
     <Compile Include="Models\RoomType.cs" />
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
@@ -234,6 +235,8 @@
     <Content Include="Views\Rooms\Edit.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Reservation\SelectAmount.cshtml" />
+    <Content Include="Views\Reservation\SelectTamagotchis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

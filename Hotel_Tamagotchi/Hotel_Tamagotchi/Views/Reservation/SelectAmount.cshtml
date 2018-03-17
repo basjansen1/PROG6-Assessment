@@ -1,0 +1,14 @@
+﻿@using Hotel_Tamagotchi.Models
+@{
+    ViewBag.Title = "SelectAmount";
+}
+
+<h2>Step 1</h2>
+<p>Please select the amount of tamagotchis you would like to join the room: </p>
+@foreach (int option in Model)
+{
+    <label>@option</label>
+    @Html.RadioButton("options", option);
+}
+
+@Html.ActionLink("Next", "SelectTamagotchis");

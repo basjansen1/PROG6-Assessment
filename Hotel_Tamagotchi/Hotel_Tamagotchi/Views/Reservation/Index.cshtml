@@ -7,11 +7,12 @@
 
 @foreach (var room in Model.Where(r => r.TamagotchiList.Count != 0))
 {
-    <h3>@room.ID</h3>
+    <h3>Room number: @room.ID</h3>
     foreach (var tamagotchi in room.TamagotchiList)
     {
         <p>@tamagotchi.Name</p>
     }
+    <hr />
 }
 
 <h2>Free rooms</h2>
@@ -21,14 +22,16 @@
             <p>Number</p>
         </th>
         <th>
-            <p>Reserve</p>
+            <p>Size</p>
         </th>
+        <th></th>
     </tr>
     @foreach (var room in Model.Where(r => r.TamagotchiList.Count == 0))
     {
         <tr>
             <td>Room number @room.ID</td>
-            <td>Reserve</td>
+            <td>@room.Size</td>
+            <td>@Html.ActionLink("Reserve", "SelectAmount", new { room_id = room.ID})</td>
         </tr>
     }
 

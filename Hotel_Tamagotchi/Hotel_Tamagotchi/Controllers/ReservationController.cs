@@ -1,4 +1,5 @@
-﻿using Hotel_Tamagotchi.Models.Repositories;
+﻿using Hotel_Tamagotchi.Models;
+using Hotel_Tamagotchi.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Hotel_Tamagotchi.Controllers
     {
         private IRoomRepository _roomRepository;
         private ITamagotchiRepository _tamagotchiRepository;
+        private int _selectedAmountOfTamagotchis;
+        private Room _selectedRoom;
         public ReservationController()
         {
 
@@ -98,6 +101,31 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult SelectAmount(int room_id)
+        {
+            _selectedRoom = _roomRepository.Get(room_id);
+            List<int> optionList = new List<int>();
+            foreach (int option in RoomSizeOptions.SizeOptions)
+            {
+                if (option <= _selectedRoom.Size)
+                {
+                    optionList.Add(option);
+                }
+            }
+            return View(optionList);
+        }
+
+        // POST: Confirm 
+        public void ConfirmSelectAmount(int amountOfTamagotchis)
+        {
+            this._selectedAmountOfTamagotchis = amountOfTamagotchis;
+            Redirect("SelectTamagotchis");
+        }
+        public ActionResult SelectTamagotchis()
+        {
+            return View();
         }
     }
 }
