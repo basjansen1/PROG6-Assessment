@@ -13,8 +13,7 @@ namespace Hotel_Tamagotchi.Controllers
     {
         private IRoomRepository _roomRepository;
         private ITamagotchiRepository _tamagotchiRepository;
-        private int _selectedAmountOfTamagotchis;
-        private Room _selectedRoom;
+        private BookingData _bookingData;
         public ReservationController()
         {
 
@@ -106,25 +105,14 @@ namespace Hotel_Tamagotchi.Controllers
 
         public ActionResult SelectAmount(int room_id)
         {
-            BookingData bookingData = new BookingData(_roomRepository.Get(room_id));
-
-           // ----------
-            //_selectedRoom = _roomRepository.Get(room_id);
-            //List<int> optionList = new List<int>();
-            //foreach (int option in RoomSizeOptions.SizeOptions)
-            //{
-            //    if (option <= _selectedRoom.Size)
-            //    {
-            //        optionList.Add(option);
-            //    }
-            //}
-            return View(bookingData.AmountOfTamagotchisOptionList);
+            _bookingData = new BookingData(_roomRepository.Get(room_id));
+            return View(_bookingData);
         }
 
         // POST: Confirm 
         public void ConfirmSelectAmount(int amountOfTamagotchis)
         {
-            this._selectedAmountOfTamagotchis = amountOfTamagotchis;
+           // this._selectedAmountOfTamagotchis = amountOfTamagotchis;
             Redirect("SelectTamagotchis");
         }
         public ActionResult SelectTamagotchis()

@@ -1,14 +1,14 @@
 ﻿@using Hotel_Tamagotchi.Models
+@model Hotel_Tamagotchi.Models.Helpers.BookingData
+
 @{
     ViewBag.Title = "SelectAmount";
 }
 
 <h2>Step 1</h2>
-<p>Please select the amount of tamagotchis you would like to join the room: </p>
-@foreach (int option in Model)
-{
-    <label>@option</label>
-    @Html.RadioButton("options", option);
-}
+<p>Please select the amount of tamagotchis you would like to join the room:</p>
+<div class="col-md-10">
+    @Html.DropDownListFor(model => model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList), "Select type")
+</div>
 <br />
-@Html.ActionLink("Next", "SelectTamagotchis");
+@Html.ActionLink("Next", "SelectTamagotchis")
