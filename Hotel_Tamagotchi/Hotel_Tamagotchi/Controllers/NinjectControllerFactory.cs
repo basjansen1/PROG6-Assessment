@@ -1,6 +1,7 @@
 ﻿using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Ninject;
+using Ninject.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Web.SessionState;
 
 namespace Hotel_Tamagotchi.Controllers
 {
-    public class NinjectControllerFactory : IControllerFactory
+    public class NinjectControllerFactory : NinjectModule, IControllerFactory
     {
         private StandardKernel _kernel;
         public NinjectControllerFactory()
@@ -20,7 +21,7 @@ namespace Hotel_Tamagotchi.Controllers
             Load();
         }
 
-        public void Load()
+        public override void Load()
         {
             // Binding models
             _kernel.Bind<Hotel_TamagotchiContext>().ToSelf();
