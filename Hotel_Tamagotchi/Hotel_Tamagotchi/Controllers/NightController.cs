@@ -26,8 +26,6 @@ namespace Hotel_Tamagotchi.Controllers
 
         public void ChangeProperties()
         {
-            int amountOfTamagotchis = _tamagotchis.Count();
-
             foreach (var t in _tamagotchis)
             {
                 t.Level++;
@@ -57,10 +55,7 @@ namespace Hotel_Tamagotchi.Controllers
                         t.Boredom += 20;
                         break;
                     case "Fightroom":
-                        if (amountOfTamagotchis > 1)
-                        {
-                            
-                        }
+                        PickRandomWinner();
                         break;
                     case "DateRoom":
                         t.Cents -= 10;
@@ -74,6 +69,28 @@ namespace Hotel_Tamagotchi.Controllers
                         break;
                 }
                 _tamagotchiRepository.Update(t);
+            }
+        }
+
+        /// <summary>
+        /// Return a random winner. 
+        /// </summary>
+        /// <returns>The index of the winner</returns>
+        private void PickRandomWinner()
+        {
+            Random r = new Random();
+            int randomWinner = r.Next(_tamagotchis.Count());
+
+            _tamagotchis[randomWinner].Cents += 20 * _tamagotchis.Count() - 1;
+            _tamagotchis[randomWinner].Level += 1;
+
+            for (int i = 0; i < _tamagotchis.Count; i++)
+            {
+                if (i != randomWinner)
+                {
+                    _tamagotchis[i].Cents -= 20;
+                    _tamagotchis[i].Health -= 30;
+                }
             }
         }
 
