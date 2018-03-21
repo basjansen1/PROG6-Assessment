@@ -169,8 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Kernel.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Helpers\BookingData.cs" />
+    <Compile Include="Helpers\ReservationHelper.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />
     <Compile Include="Models\Repositories\IRoomRepository.cs" />
@@ -179,7 +180,7 @@
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Repositories\TamagotchiRepository.cs" />
     <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\Helpers\RoomSizeOptions.cs" />
+    <Compile Include="Helpers\RoomSizeOptions.cs" />
     <Compile Include="Models\RoomType.cs" />
     <Compile Include="Models\Tamagotchi.cs" />
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
@@ -238,9 +239,11 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Reservation\SelectAmount.cshtml" />
     <Content Include="Views\Reservation\SelectTamagotchis.cshtml" />
+    <Content Include="Views\Reservation\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

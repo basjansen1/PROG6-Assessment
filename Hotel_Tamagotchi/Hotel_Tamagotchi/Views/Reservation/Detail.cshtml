@@ -1,0 +1,20 @@
+﻿@model Hotel_Tamagotchi.Helpers.ReservationHelper
+@{
+    ViewBag.Title = "Detail";
+}
+
+@using (Html.BeginForm())
+{
+    <h2>Please check your reservation</h2>
+    <h3>Room number: @Model.SelectedRoom.ID</h3>
+    <h3>Amount of Tamagotchis: @Model.SelectedAmountOfTamagotchis</h3>
+    foreach (var tamagotchi in Model.SelectedTamagotchis)
+    {
+        <p>@tamagotchi.Name</p>
+    }
+
+    <input type="submit" value="Confirm" class="btn btn-default" />
+}
+
+
+

@@ -1,6 +1,8 @@
-﻿using Hotel_Tamagotchi.Models;
+﻿using Hotel_Tamagotchi.Helpers;
+using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Ninject;
+using Ninject.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ using System.Web.SessionState;
 
 namespace Hotel_Tamagotchi.Controllers
 {
-    public class NinjectControllerFactory : IControllerFactory
+    public class NinjectControllerFactory : NinjectModule, IControllerFactory
     {
         private StandardKernel _kernel;
         public NinjectControllerFactory()
@@ -20,18 +22,19 @@ namespace Hotel_Tamagotchi.Controllers
             Load();
         }
 
-        public void Load()
+        public override void Load()
         {
             // Binding models
             _kernel.Bind<Hotel_TamagotchiContext>().ToSelf();
             _kernel.Bind<IRoomRepository>().To<RoomRepository>();
-            _kernel.Bind<ITamagotchiRepository>().To<TamagotchiRepository>();
+            _kernel.Bind<ITamagotchiRepository>().To<TamagotchiRepository>().InSingletonScope();
+            _kernel.Bind<ReservationHelper>().ToSelf().InSingletonScope();
 
             // Binding controllers
             _kernel.Bind<IController>().To<HomeController>();
             _kernel.Bind<IController>().To<RoomsController>();
             _kernel.Bind<IController>().To<TamagotchisController>();
-            _kernel.Bind<IController>().To<ReservationController>().InSingletonScope();
+            _kernel.Bind<IController>().To<ReservationController>();
         }
 
         public IController CreateController(RequestContext requestContext, string controllerName)

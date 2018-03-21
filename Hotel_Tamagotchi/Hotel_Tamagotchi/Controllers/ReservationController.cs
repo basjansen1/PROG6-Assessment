@@ -1,5 +1,5 @@
-﻿using Hotel_Tamagotchi.Models;
-using Hotel_Tamagotchi.Models.Helpers;
+﻿using Hotel_Tamagotchi.Helpers;
+using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using System;
 using System.Collections.Generic;
@@ -14,16 +14,17 @@ namespace Hotel_Tamagotchi.Controllers
     {
         private IRoomRepository _roomRepository;
         private ITamagotchiRepository _tamagotchiRepository;
-        private BookingData _bookingData;
-        public ReservationController()
-        {
+        private ReservationHelper _reservationHelper;
+        //public ReservationController()
+        //{
+            
+        //}
 
-        }
-
-        public ReservationController(IRoomRepository roomRepository, ITamagotchiRepository tamagotchiRepository)
+        public ReservationController(IRoomRepository roomRepository, ITamagotchiRepository tamagotchiRepository, ReservationHelper reservationHelper)
         {
             this._roomRepository = roomRepository;
             this._tamagotchiRepository = tamagotchiRepository;
+            this._reservationHelper = reservationHelper;
         }
 
         // GET: Reservation
@@ -32,48 +33,19 @@ namespace Hotel_Tamagotchi.Controllers
             return View(_roomRepository.GetAll());
         }
 
-        // GET: Reservation/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Reservation/Create
         public ActionResult Create(int room_id)
         {
-            _bookingData = new BookingData(_roomRepository.Get(room_id));
             return View();
         }
 
         // POST: Reservation/Create
         [HttpPost]
-        public ActionResult Create(BookingData bookingData)
+        public ActionResult Create()
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Reservation/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Reservation/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }
@@ -105,23 +77,65 @@ namespace Hotel_Tamagotchi.Controllers
             }
         }
 
-        public ActionResult SelectAmount(int room_id)
+        public ActionResult SelectRoom(int room_id)
         {
-            _bookingData = new BookingData(_roomRepository.Get(room_id));
-            return View(_bookingData);
+            _reservationHelper.Set(_roomRepository.Get(room_id));
+            return RedirectToAction("SelectAmount");
+        }
+        public ActionResult SelectAmount()
+        {
+            return View(_reservationHelper);
+        }
+
+        public bool ValidateSelectedAmount(Room room)
+        {
+            if (room.Size >= room.TamagotchiList.Count())
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         // POST: Confirm 
-        public void ConfirmSelectAmount()
+        public ActionResult ConfirmSelectAmount(Room room)
         {
-           if (_bookingData.SelectedAmountOfTamagotchis == null)
+           if (ValidateSelectedAmount(room))
             {
-                Redirect("SelectTamagotchis");
+                return RedirectToAction("SelectTamagotchis");
+            } else
+            {
+                throw new InvalidOperationException();
             }
         }
         public ActionResult SelectTamagotchis()
         {
-            return View();
+            _reservationHelper.SelectedTamagotchis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList();
+            return View(_reservationHelper);
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmSelectedTamagotchis()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult SelectTamagotchis(ReservationHelper helper)
+        {
+            return RedirectToAction("Detail");
+        }
+
+        public ActionResult Detail()
+        {
+            return View(_reservationHelper);
+        }
+
+        public void Complete()
+        {
+            _reservationHelper.SelectedTamagotchis.ForEach(t => _reservationHelper.SelectedRoom.TamagotchiList.Add(t));
+            _roomRepository.Update(_reservationHelper.SelectedRoom);
         }
     }
 }

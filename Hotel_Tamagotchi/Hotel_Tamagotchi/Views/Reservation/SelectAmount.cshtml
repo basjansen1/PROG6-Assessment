@@ -1,5 +1,4 @@
-﻿@using Hotel_Tamagotchi.Models
-@model Hotel_Tamagotchi.Models.Helpers.BookingData
+﻿@model Hotel_Tamagotchi.Helpers.ReservationHelper
 
 @{
     ViewBag.Title = "SelectAmount";
@@ -8,7 +7,8 @@
 <h2>Step 1</h2>
 <p>Please select the amount of tamagotchis you would like to join the room:</p>
 <div class="col-md-10">
-    @Html.DropDownListFor(model => model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList))
+    @Html.DropDownListFor(Model => Model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList))
+    @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
 </div>
 <br />
-@Html.ActionLink("Next", "ConfirmSelectAmount")
+@Html.ActionLink("Next", "ConfirmSelectAmount", Model.SelectedRoom)

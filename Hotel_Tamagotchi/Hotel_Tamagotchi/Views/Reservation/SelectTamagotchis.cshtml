@@ -1,9 +1,21 @@
-﻿
+﻿@model Hotel_Tamagotchi.Helpers.ReservationHelper
 @{
     ViewBag.Title = "SelectTamagotchis";
 }
 
 <h2>Step 2</h2>
-<p>Please select @Model Tamagotchis you would like to join the room</p>
+<p>Please select @Model.SelectedAmountOfTamagotchis Tamagotchis you would like to join the room</p>
+
+@using (Html.BeginForm())
+{
+    <select multiple="multiple" name="tamagotchis" class="productSelect">
+        @foreach (var tamagotchi in Model.SelectedTamagotchis)
+        {
+            <option selected="selected" value="@tamagotchi">@tamagotchi.Name</option>
+        }
+    </select>
+    
+    <input type="submit" value="Next" class="btn btn-default" />
+}
 
 
