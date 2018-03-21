@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
+using Hotel_Tamagotchi.Models.ViewModels;
 
 namespace Hotel_Tamagotchi.Controllers
 {
@@ -38,7 +39,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomRepository.Get((int) id);
+            RoomViewModel room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -47,9 +48,12 @@ namespace Hotel_Tamagotchi.Controllers
         }
 
         // GET: Rooms/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            Room room = new Room();
+            RoomViewModel roomViewModel = new RoomViewModel() { Room = room };
+            return View(roomViewModel);
         }
 
         // POST: Rooms/Create
@@ -57,7 +61,7 @@ namespace Hotel_Tamagotchi.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Size,Type")] Room room)
+        public ActionResult Create([Bind(Include = "Room")] RoomViewModel room)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +79,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomRepository.Get((int) id);
+            RoomViewModel room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -88,7 +92,7 @@ namespace Hotel_Tamagotchi.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Size,Type")] Room room)
+        public ActionResult Edit([Bind(Include = "ID,Size,Type")] RoomViewModel room)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +109,7 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomRepository.Get((int) id);
+            RoomViewModel room = _roomRepository.Get((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -118,7 +122,7 @@ namespace Hotel_Tamagotchi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Room room = _roomRepository.Get(id);
+            RoomViewModel room = _roomRepository.Get(id);
             _roomRepository.Delete(room);
             return RedirectToAction("Index");
         }

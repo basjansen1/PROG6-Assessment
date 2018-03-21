@@ -11,102 +11,97 @@ namespace Hotel_Tamagotchi.Models.ViewModels
         {
             get
             {
-                return _tamagotchi.ID;
+                return Tamagotchi.ID;
             }
         }
         public string Name
         {
             get
             {
-                return _tamagotchi.Name;
+                return Tamagotchi.Name;
             }
             set
             {
-                _tamagotchi.Name = value;
+                Tamagotchi.Name = value;
             }
         }
         public int Age
         {
             get
             {
-                return _tamagotchi.Age;
+                return Tamagotchi.Age;
             }
             set
             {
-                _tamagotchi.Age = value;
+                Tamagotchi.Age = value;
             }
         }
         public int Cents
         {
             get
             {
-                return _tamagotchi.Cents;
+                return Tamagotchi.Cents;
             }
             set
             {
-                _tamagotchi.Cents = value;
+                Tamagotchi.Cents = value;
             }
         }
         public int Health
         {
             get
             {
-                return _tamagotchi.Health;
+                return Tamagotchi.Health;
             }
             set
             {
-                _tamagotchi.Health = value;
+                Tamagotchi.Health = value;
             }
         }
         public int Boredom
         {
             get
             {
-                return _tamagotchi.Boredom;
+                return Tamagotchi.Boredom;
             }
             set
             {
-                _tamagotchi.Boredom = value;
+                Tamagotchi.Boredom = value;
             }
         }
         public bool Alive
         {
             get
             {
-                return _tamagotchi.Alive;
+                return Tamagotchi.Alive;
             }
             set
             {
 
-                _tamagotchi.Alive = value;
+                Tamagotchi.Alive = value;
             }
         }
         public RoomViewModel CurrentRoom
         {
             get
             {
-                return new RoomViewModel (_tamagotchi.CurrentRoom);
+                return new RoomViewModel() { Room = Tamagotchi.CurrentRoom };
             }
             set
             {
-                _tamagotchi.CurrentRoom = value.ToModel();
+                Tamagotchi.CurrentRoom = value.Room;
             }
         }
         public TamagotchiViewModel()
         {
-            this._tamagotchi = new Tamagotchi();
+            this.Tamagotchi = new Tamagotchi();
         }
 
         public TamagotchiViewModel(Tamagotchi tamagotchi)
         {
-            this._tamagotchi = tamagotchi;
+            this.Tamagotchi = tamagotchi;
         }
 
-        private Tamagotchi _tamagotchi;
-
-        public Tamagotchi ToModel()
-        {
-            return _tamagotchi;
-        }
+        public Tamagotchi Tamagotchi;
     }
 }

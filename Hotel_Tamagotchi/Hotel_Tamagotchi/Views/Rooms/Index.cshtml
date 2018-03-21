@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hotel_Tamagotchi.Models.Room>
+﻿@model IEnumerable<Hotel_Tamagotchi.Models.ViewModels.RoomViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Size)
+            @Html.DisplayNameFor(model => model.Room.Size)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Room.Type)
         </th>
         <th></th>
     </tr>
@@ -23,15 +23,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Size)
+            @Html.DisplayFor(modelItem => item.Room.Size)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.Room.Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Room.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Room.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Room.ID })
         </td>
     </tr>
 }
