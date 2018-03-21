@@ -7,19 +7,61 @@ namespace Hotel_Tamagotchi.Models.ViewModels
 {
     public class RoomViewModel
     {
-        public int? SelectedAmountOfTamagotchis { get; set; }
-        public List<int> AmountOfTamagotchisOptionList { get; set; }
-        public List<Tamagotchi> SelectedTamagotchis { get; set; }
+        public int ID
+        {
+            get
+            {
+                return _room.ID;
+            }
+        }
+        public int Size
+        {
+            get
+            {
+                return _room.Size;
+            }
+            set
+            {
+                _room.Size = value;
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                return _room.Type;
+            }
+            set
+            {
+                _room.Type = value;
+            }
+        }
+        public List<TamagotchiViewModel> TamagotchiList
+        {
+            get
+            {
+                return _room.TamagotchiList.Select(t => new TamagotchiViewModel(t)).ToList();
+            }
+            set
+            {
+                _room.TamagotchiList = value.Select(t => t.ToModel()).ToList();
+            }
+        }
         public RoomViewModel()
         {
-            this.Room = new Room();
+            this._room = new Room();
         }
 
         public RoomViewModel(Room room)
         {
-            this.Room = room;
+            this._room = room;
         }
 
-        public Room Room { get; set; }
+        private Room _room;
+
+        public Room ToModel()
+        {
+            return _room;
+        }
     }
 }
