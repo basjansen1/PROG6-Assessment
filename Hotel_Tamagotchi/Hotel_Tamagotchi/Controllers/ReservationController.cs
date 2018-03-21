@@ -1,6 +1,7 @@
 ﻿using Hotel_Tamagotchi.Helpers;
 using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
+using Hotel_Tamagotchi.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,32 +61,41 @@ namespace Hotel_Tamagotchi.Controllers
         {
             return View();
         }
-
-        public ActionResult SelectRoom(int room_id)
+        [HttpGet]
+        public ActionResult SelectAmount(int room_id)
         {
-            _reservationHelper.Set(_roomRepository.Get(room_id));
-            return RedirectToAction("SelectAmount");
-        }
-        public ActionResult SelectAmount()
-        {
-            return View(_reservationHelper);
+            RoomViewModel roomViewModel = new RoomViewModel { Room = _roomRepository.Get(room_id), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() };
+            return View(roomViewModel);
         }
 
-        public bool ValidateSelectedAmount(Room room)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SelectAmount(RoomViewModel roomVM)
         {
-            if (room.Size >= room.TamagotchiList.Count())
+            if(ValidateSelectedAmount(roomVM))
             {
-                return true;
+                return RedirectToAction("SelectTamagotchis");
             } else
             {
+                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for" + roomVM.Room.Size + "tamagotchis");
+                return View(roomVM);
+            }
+        }
+        public bool ValidateSelectedAmount(RoomViewModel roomViewModel)
+        {
+            if (roomViewModel.AmountOfTamagotchis > roomViewModel.Room.Size)
+            {
                 return false;
+            } else
+            {
+                return true;
             }
         }
 
         // POST: Confirm 
         public ActionResult ConfirmSelectAmount(Room room)
         {
-           if (ValidateSelectedAmount(room))
+           if (ValidateSelectedAmount(null))
             {
                 return RedirectToAction("SelectTamagotchis");
             } else

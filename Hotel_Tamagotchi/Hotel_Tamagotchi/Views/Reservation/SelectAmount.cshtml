@@ -1,4 +1,4 @@
-﻿@model Hotel_Tamagotchi.Helpers.ReservationHelper
+﻿@model Hotel_Tamagotchi.Models.ViewModels.RoomViewModel 
 
 @{
     ViewBag.Title = "SelectAmount";
@@ -6,9 +6,15 @@
 
 <h2>Step 1</h2>
 <p>Please select the amount of tamagotchis you would like to join the room:</p>
-<div class="col-md-10">
-    @Html.DropDownListFor(Model => Model.SelectedAmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptionList))
-    @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
-</div>
-<br />
-@Html.ActionLink("Next", "ConfirmSelectAmount", Model.SelectedRoom)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-10">
+        @Html.DropDownListFor(Model => Model.AmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptions))
+        @Html.ValidationMessageFor(model => model.AmountOfTamagotchis, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <input type="submit" value="Next" class="btn-default" />
+}
