@@ -13,31 +13,31 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
         }
 
-        public void Add(Room room)
+        public void Add(RoomViewModel room)
         {
-            this._context.Rooms.Add(room);
+            this._context.Rooms.Add(room.Room);
             this._context.SaveChanges();
         }
 
-        public void Delete(Room room)
+        public void Delete(RoomViewModel room)
         {
-            this._context.Rooms.Remove(room);
+            this._context.Rooms.Remove(room.Room);
             this._context.SaveChanges();
         }
 
-        public Room Get(int id)
+        public RoomViewModel Get(int id)
         {
-            return this._context.Rooms.Include("TamagotchiList").Where(t => t.ID == id).First();
+            return new RoomViewModel(this._context.Rooms.Include("TamagotchiList").Where(t => t.ID == id).First());
         }
 
-        public List<Room> GetAll()
+        public List<RoomViewModel> GetAll()
         {
-            return this._context.Rooms.Include("TamagotchiList").ToList();
+            return this._context.Rooms.Include("TamagotchiList").Select(r => new RoomViewModel(r)).ToList();
         }
 
-        public void Update(Room room)
+        public void Update(RoomViewModel room)
         {
-            this._context.Entry(room).State = EntityState.Modified;
+            this._context.Entry(room.Room).State = EntityState.Modified;
             this._context.SaveChanges();
         }
     }
