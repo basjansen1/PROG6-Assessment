@@ -79,7 +79,7 @@ namespace Hotel_Tamagotchi.Controllers
 
         public ActionResult SelectRoom(int room_id)
         {
-          //  _reservationHelper.Set(_roomRepository.Get(room_id));
+            _reservationHelper.Set(_roomRepository.Get(room_id));
             return RedirectToAction("SelectAmount");
         }
         public ActionResult SelectAmount()
@@ -135,7 +135,7 @@ namespace Hotel_Tamagotchi.Controllers
         public void Complete()
         {
             _reservationHelper.SelectedTamagotchis.ForEach(t => _reservationHelper.SelectedRoom.TamagotchiList.Add(t));
-            //_roomRepository.Update(_reservationHelper.SelectedRoom);
+            _roomRepository.Update(_reservationHelper.SelectedRoom);
         }
     }
 }

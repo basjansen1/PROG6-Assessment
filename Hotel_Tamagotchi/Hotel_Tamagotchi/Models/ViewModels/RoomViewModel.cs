@@ -10,11 +10,16 @@ namespace Hotel_Tamagotchi.Models.ViewModels
         public int? SelectedAmountOfTamagotchis { get; set; }
         public List<int> AmountOfTamagotchisOptionList { get; set; }
         public List<Tamagotchi> SelectedTamagotchis { get; set; }
-        public Room Room { get; set; }
-
         public RoomViewModel()
         {
-
+            this.Room = new Room();
         }
+
+        public RoomViewModel(Room room)
+        {
+            this.Room = room;
+        }
+
+        public Room Room { get; set; }
     }
 }

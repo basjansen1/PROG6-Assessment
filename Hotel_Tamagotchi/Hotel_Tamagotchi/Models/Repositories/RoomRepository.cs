@@ -27,14 +27,12 @@ namespace Hotel_Tamagotchi.Models.Repositories
 
         public RoomViewModel Get(int id)
         {
-            return new RoomViewModel() { Room = this._context.Rooms.Include("TamagotchiList").Where(t => t.ID == id).First() };
+            return new RoomViewModel(this._context.Rooms.Include("TamagotchiList").Where(t => t.ID == id).First());
         }
 
         public List<RoomViewModel> GetAll()
         {
-            List<RoomViewModel> RoomViewModelList = new List<RoomViewModel>();
-            this._context.Rooms.Include("TamagotchiList").ToList().ForEach(r => RoomViewModelList.Add(new RoomViewModel() { Room = r }));
-            return RoomViewModelList;
+            return this._context.Rooms.Include("TamagotchiList").Select(r => new RoomViewModel(r)).ToList();
         }
 
         public void Update(RoomViewModel room)
