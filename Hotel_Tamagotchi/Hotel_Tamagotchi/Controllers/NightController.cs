@@ -68,6 +68,12 @@ namespace Hotel_Tamagotchi.Controllers
                         t.Boredom += 20;
                         break;
                 }
+
+                if (t.Health > 100)
+                    t.Health = 100;
+                if (t.Boredom > 100)
+                    t.Boredom = 100;
+
                 _tamagotchiRepository.Update(t);
             }
         }
