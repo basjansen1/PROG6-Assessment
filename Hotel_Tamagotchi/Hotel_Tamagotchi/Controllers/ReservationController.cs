@@ -34,13 +34,6 @@ namespace Hotel_Tamagotchi.Controllers
             return View(_roomRepository.GetAll());
         }
 
-        // GET: Reservation/Create
-        public ActionResult Create(int room_id)
-        {
-            return View();
-        }
-
-        // POST: Reservation/Create
         [HttpPost]
         public ActionResult Create()
         {
@@ -54,12 +47,6 @@ namespace Hotel_Tamagotchi.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: Reservation/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
         [HttpGet]
         public ActionResult SelectAmount(int room_id)
@@ -84,7 +71,7 @@ namespace Hotel_Tamagotchi.Controllers
                 return View(GetRoomViewModel(roomVM.Room.ID));
             }
         }
-        public bool ValidateSelectedAmount(RoomViewModel roomViewModel)
+        public bool ValidateSelectedAmount(RoomViewModel roomViewModel) // testbaar voor unit test
         {
             if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size && roomViewModel.AmountOfTamagotchis != 0)
             {
@@ -94,28 +81,11 @@ namespace Hotel_Tamagotchi.Controllers
                 return false;
             }
         }
-
-        // POST: Confirm 
-        public ActionResult ConfirmSelectAmount(Room room)
-        {
-           if (ValidateSelectedAmount(null))
-            {
-                return RedirectToAction("SelectTamagotchis");
-            } else
-            {
-                throw new InvalidOperationException();
-            }
-        }
+        [HttpGet]
         public ActionResult SelectTamagotchis()
         {
             _reservationHelper.SelectedTamagotchis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList();
             return View(_reservationHelper);
-        }
-
-        [HttpPost]
-        public ActionResult ConfirmSelectedTamagotchis()
-        {
-            return null;
         }
 
         [HttpPost]
