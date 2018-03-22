@@ -74,7 +74,7 @@ namespace Hotel_Tamagotchi.Controllers
         {
             if(!ValidateSelectedAmount(roomVM))
             {
-                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for " + roomVM.Room.Size + " tamagotchis");
+                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for " + roomVM.Room.Size + " tamagotchis. Please choose an amount no more than "+ roomVM.Room.Size);
             }
 
             if (ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace Hotel_Tamagotchi.Controllers
         }
         public bool ValidateSelectedAmount(RoomViewModel roomViewModel)
         {
-            if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size)
+            if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size && roomViewModel.AmountOfTamagotchis != 0)
             {
                 return true;
             } else

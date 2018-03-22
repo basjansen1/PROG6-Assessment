@@ -11,7 +11,6 @@ namespace Hotel_Tamagotchi.Models.ViewModels
 
         public Room Room { get; set; }
         public List<Tamagotchi> Tamagotichis { get; set; }
-        [Required]
         public int AmountOfTamagotchis { get; set; }
         public List<int> AmountOfTamagotchisOptions { get; set; }
         

@@ -13,6 +13,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Room.ID)
     @Html.HiddenFor(model => model.Room.Size)
+    @Html.HiddenFor(model => model.Room.Type)
 
     <div class="col-md-10">
         @Html.DropDownListFor(Model => Model.AmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptions), "Select amount")
