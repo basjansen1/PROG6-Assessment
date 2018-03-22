@@ -72,23 +72,27 @@ namespace Hotel_Tamagotchi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SelectAmount(RoomViewModel roomVM)
         {
-            if(ValidateSelectedAmount(roomVM))
+            if(!ValidateSelectedAmount(roomVM))
+            {
+                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for " + roomVM.Room.Size + " tamagotchis");
+            }
+
+            if (ModelState.IsValid)
             {
                 return RedirectToAction("SelectTamagotchis");
             } else
             {
-                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for" + roomVM.Room.Size + "tamagotchis");
-                return View(roomVM);
+                return View(new RoomViewModel { Room = _roomRepository.Get(roomVM.Room.ID), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() });
             }
         }
         public bool ValidateSelectedAmount(RoomViewModel roomViewModel)
         {
-            if (roomViewModel.AmountOfTamagotchis > roomViewModel.Room.Size)
-            {
-                return false;
-            } else
+            if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size)
             {
                 return true;
+            } else
+            {
+                return false;
             }
         }
 
