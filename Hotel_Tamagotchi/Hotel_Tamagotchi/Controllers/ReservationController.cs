@@ -64,8 +64,7 @@ namespace Hotel_Tamagotchi.Controllers
         [HttpGet]
         public ActionResult SelectAmount(int room_id)
         {
-            RoomViewModel roomViewModel = new RoomViewModel { Room = _roomRepository.Get(room_id), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() };
-            return View(roomViewModel);
+            return View(GetRoomViewModel(room_id));
         }
 
         [HttpPost]
@@ -82,7 +81,7 @@ namespace Hotel_Tamagotchi.Controllers
                 return RedirectToAction("SelectTamagotchis");
             } else
             {
-                return View(new RoomViewModel { Room = _roomRepository.Get(roomVM.Room.ID), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() });
+                return View(GetRoomViewModel(roomVM.Room.ID));
             }
         }
         public bool ValidateSelectedAmount(RoomViewModel roomViewModel)
@@ -128,6 +127,11 @@ namespace Hotel_Tamagotchi.Controllers
         public ActionResult Detail()
         {
             return View(_reservationHelper);
+        }
+
+        public RoomViewModel GetRoomViewModel(int id)
+        {
+            return new RoomViewModel { Room = _roomRepository.Get(id), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() };
         }
 
         public void Complete()
