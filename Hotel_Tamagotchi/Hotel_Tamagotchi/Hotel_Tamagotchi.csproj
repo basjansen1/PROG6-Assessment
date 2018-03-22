@@ -240,6 +240,7 @@
     <Content Include="Views\Reservation\SelectAmount.cshtml" />
     <Content Include="Views\Reservation\SelectTamagotchis.cshtml" />
     <Content Include="Views\Reservation\Detail.cshtml" />
+    <Content Include="Views\Reservation\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

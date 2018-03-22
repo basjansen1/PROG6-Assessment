@@ -34,43 +34,39 @@ namespace Hotel_Tamagotchi.Controllers
             return View(_roomRepository.GetAll());
         }
 
-        [HttpPost]
-        public ActionResult Create()
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
         [HttpGet]
-        public ActionResult SelectAmount(int room_id)
+        public ActionResult Create(int room_id)
         {
             return View(GetRoomViewModel(room_id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SelectAmount(RoomViewModel roomVM)
+        public ActionResult Create(RoomViewModel roomVM)
         {
-            if(!ValidateSelectedAmount(roomVM))
+            if (!ValidateSelectedAmount(roomVM))
             {
-                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for " + roomVM.Room.Size + " tamagotchis. Please choose an amount no more than "+ roomVM.Room.Size);
+                ModelState.AddModelError("AmountOfTamagotchis", "This room has only space for " + roomVM.Room.Size + " tamagotchis. Please choose an amount no more than " + roomVM.Room.Size);
+            } else if (!ValidateSelectTamagotchis(roomVM))
+            {
+                ModelState.AddModelError("Tamagotichis", "You have to select " + roomVM.AmountOfTamagotchis + " Tamagotchis");
             }
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("SelectTamagotchis");
-            } else
+                return RedirectToAction("Detail");
+            }
+            else
             {
                 return View(GetRoomViewModel(roomVM.Room.ID));
             }
         }
+
+        public bool ValidateReservation(RoomViewModel roomVM)
+        {
+            return true;
+        }
+
         public bool ValidateSelectedAmount(RoomViewModel roomViewModel) // testbaar voor unit test
         {
             if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size && roomViewModel.AmountOfTamagotchis != 0)
@@ -81,17 +77,16 @@ namespace Hotel_Tamagotchi.Controllers
                 return false;
             }
         }
-        [HttpGet]
-        public ActionResult SelectTamagotchis()
-        {
-            _reservationHelper.SelectedTamagotchis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList();
-            return View(_reservationHelper);
-        }
 
-        [HttpPost]
-        public ActionResult SelectTamagotchis(ReservationHelper helper)
+        public bool ValidateSelectTamagotchis(RoomViewModel roomViewModel) // testbaar voor unit test
         {
-            return RedirectToAction("Detail");
+            if (roomViewModel.SelectedTamagotchisIDList.Count() <= roomViewModel.AmountOfTamagotchis)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         public ActionResult Detail()
@@ -104,10 +99,11 @@ namespace Hotel_Tamagotchi.Controllers
             return new RoomViewModel { Room = _roomRepository.Get(id), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() };
         }
 
-        public void Complete()
+        public ActionResult Complete()
         {
             _reservationHelper.SelectedTamagotchis.ForEach(t => _reservationHelper.SelectedRoom.TamagotchiList.Add(t));
             _roomRepository.Update(_reservationHelper.SelectedRoom);
+            return RedirectToAction("Index");
         }
     }
 }
