@@ -29,6 +29,7 @@ namespace Hotel_Tamagotchi.Controllers
             foreach (var t in _tamagotchis)
             {
                 t.Level++;
+
                 // Standaard mutaties
                 if (t.Boredom >= 70)
                     t.Health -= 20;
@@ -79,9 +80,9 @@ namespace Hotel_Tamagotchi.Controllers
         }
 
         /// <summary>
-        /// Return a random winner. 
+        /// Picks a random winner. 
         /// </summary>
-        /// <returns>The index of the winner</returns>
+        /// <returns></returns>
         private void PickRandomWinner()
         {
             Random r = new Random();
@@ -99,6 +100,5 @@ namespace Hotel_Tamagotchi.Controllers
                 }
             }
         }
-
     }
 }
