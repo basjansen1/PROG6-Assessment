@@ -19,10 +19,5 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
             _context.Dispose();
         }
-
-        protected void ExcecuteSQLCommand(string sql)
-        {
-            _context.Database.ExecuteSqlCommand(sql);
-        }
     }
 }
