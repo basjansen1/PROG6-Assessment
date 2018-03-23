@@ -9,5 +9,6 @@ namespace Hotel_Tamagotchi.Models.Repositories
 {
     public interface ITamagotchiRepository : IRepository<Tamagotchi>
     {
+        void SetRoom(Room room, Tamagotchi tamagotchi);
     }
 }

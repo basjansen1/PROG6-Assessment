@@ -120,8 +120,11 @@ namespace Hotel_Tamagotchi.Controllers
         public void Complete(RoomViewModel roomViewModel)
         {
             Room room = _roomRepository.Get(_detailsRoomVM.Room.ID);
-            room.TamagotchiList = _detailsRoomVM.Tamagotichis;
-            room.TamagotchiList.ForEach(t => _tamagotchiRepository.Update(t));
+            List<Tamagotchi> SelectedTamagotchiList = _detailsRoomVM.Tamagotichis.Select(t => _tamagotchiRepository.Get(t.ID)).ToList();
+
+            room.TamagotchiList = SelectedTamagotchiList;
+            //SelectedTamagotchiList.ForEach(t => _tamagotchiRepository.SetRoom(room, t));
+            SelectedTamagotchiList.ForEach(t => _tamagotchiRepository.Delete(t));
             _roomRepository.Update(room);
         }
     }
