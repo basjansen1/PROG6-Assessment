@@ -35,6 +35,14 @@ namespace Hotel_Tamagotchi.Models.Repositories
             return this._context.Tamagotchis.Include("CurrentRoom").ToList();
         }
 
+        public void SetRoom(Room room, Tamagotchi tamagotchi)
+        {
+            //this._context.Rooms.Attach(room);
+            this._context.Tamagotchis.Attach(tamagotchi);
+            tamagotchi.CurrentRoom = room;
+            Update(tamagotchi);
+        }
+
         public void Update(Tamagotchi tamagotchi)
         {
             this._context.Entry(tamagotchi).State = EntityState.Modified;
