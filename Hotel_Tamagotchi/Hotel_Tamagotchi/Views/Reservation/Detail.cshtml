@@ -5,6 +5,10 @@
 
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(model => model.Room.ID)
+    @Html.HiddenFor(model => model.Room.Size)
+    @Html.HiddenFor(model => model.Room.Type)
+
     <h2>Please check your reservation</h2>
     <h3>Room number: @Model.Room.ID</h3>
     <h3>Amount of Tamagotchis: @Model.AmountOfTamagotchis</h3>

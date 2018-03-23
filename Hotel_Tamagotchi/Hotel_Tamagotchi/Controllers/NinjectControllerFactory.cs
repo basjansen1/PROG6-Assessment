@@ -28,7 +28,7 @@ namespace Hotel_Tamagotchi.Controllers
             // Binding models
             _kernel.Bind<Hotel_TamagotchiContext>().ToSelf();
             _kernel.Bind<IRoomRepository>().To<RoomRepository>();
-            _kernel.Bind<ITamagotchiRepository>().To<TamagotchiRepository>().InSingletonScope();
+            _kernel.Bind<ITamagotchiRepository>().To<TamagotchiRepository>();
             _kernel.Bind<RoomViewModel>().ToSelf().InSingletonScope();
 
             // Binding controllers

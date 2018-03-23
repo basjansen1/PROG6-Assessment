@@ -119,9 +119,8 @@ namespace Hotel_Tamagotchi.Controllers
 
         public void Complete(RoomViewModel roomViewModel)
         {
-            Room room = _detailsRoomVM.Room;
+            Room room = _roomRepository.Get(_detailsRoomVM.Room.ID);
             room.TamagotchiList = _detailsRoomVM.Tamagotichis;
-            room.TamagotchiList.ForEach(t => t.CurrentRoom = room);
             room.TamagotchiList.ForEach(t => _tamagotchiRepository.Update(t));
             _roomRepository.Update(room);
         }
