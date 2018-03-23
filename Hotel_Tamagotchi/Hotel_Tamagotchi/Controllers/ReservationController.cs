@@ -15,17 +15,17 @@ namespace Hotel_Tamagotchi.Controllers
     {
         private IRoomRepository _roomRepository;
         private ITamagotchiRepository _tamagotchiRepository;
-        private ReservationHelper _reservationHelper;
+        private RoomViewModel _detailsRoomVM;
         //public ReservationController()
         //{
             
         //}
 
-        public ReservationController(IRoomRepository roomRepository, ITamagotchiRepository tamagotchiRepository, ReservationHelper reservationHelper)
+        public ReservationController(IRoomRepository roomRepository, ITamagotchiRepository tamagotchiRepository, RoomViewModel detailsRoomVM)
         {
             this._roomRepository = roomRepository;
             this._tamagotchiRepository = tamagotchiRepository;
-            this._reservationHelper = reservationHelper;
+            this._detailsRoomVM = detailsRoomVM;
         }
 
         // GET: Reservation
@@ -54,6 +54,7 @@ namespace Hotel_Tamagotchi.Controllers
 
             if (ModelState.IsValid)
             {
+                ProcessReservation(roomVM);
                 return RedirectToAction("Detail");
             }
             else
@@ -80,7 +81,7 @@ namespace Hotel_Tamagotchi.Controllers
 
         public bool ValidateSelectTamagotchis(RoomViewModel roomViewModel) // testbaar voor unit test
         {
-            if (roomViewModel.SelectedTamagotchisIDList.Count() <= roomViewModel.AmountOfTamagotchis)
+            if (roomViewModel.SelectedTamagotchisIDList.Count() <= roomViewModel.AmountOfTamagotchis && roomViewModel.SelectedTamagotchisIDList.Count() > 0)
             {
                 return true;
             } else
@@ -91,7 +92,7 @@ namespace Hotel_Tamagotchi.Controllers
 
         public ActionResult Detail()
         {
-            return View(_reservationHelper);
+            return View(_detailsRoomVM);
         }
 
         public RoomViewModel GetRoomViewModel(int id)
@@ -99,10 +100,19 @@ namespace Hotel_Tamagotchi.Controllers
             return new RoomViewModel { Room = _roomRepository.Get(id), AmountOfTamagotchisOptions = RoomSizeOptions.SizeOptions, Tamagotichis = _tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList() };
         }
 
+        public RoomViewModel ProcessReservation(RoomViewModel roomVM)
+        {
+            _detailsRoomVM.AmountOfTamagotchis = roomVM.AmountOfTamagotchis;
+            _detailsRoomVM.Room = roomVM.Room;
+            _detailsRoomVM.SelectedTamagotchisIDList = roomVM.SelectedTamagotchisIDList;
+            _detailsRoomVM.Tamagotichis = roomVM.SelectedTamagotchisIDList.Select(ti => _tamagotchiRepository.Get(ti)).ToList();
+            return roomVM;
+        }
+
         public ActionResult Complete()
         {
-            _reservationHelper.SelectedTamagotchis.ForEach(t => _reservationHelper.SelectedRoom.TamagotchiList.Add(t));
-            _roomRepository.Update(_reservationHelper.SelectedRoom);
+            //_reservationHelper.SelectedTamagotchis.ForEach(t => _reservationHelper.SelectedRoom.TamagotchiList.Add(t));
+            //_roomRepository.Update(_reservationHelper.SelectedRoom);
             return RedirectToAction("Index");
         }
     }

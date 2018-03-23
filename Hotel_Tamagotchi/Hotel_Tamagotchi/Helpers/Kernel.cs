@@ -24,7 +24,7 @@ namespace Hotel_Tamagotchi.Helpers
         {
             // Instanciate singleton objects
             _context = new Hotel_TamagotchiContext();
-            _reservationController = new ReservationController(GetRoomRepository(), GetTamagotchiRepository(), new ReservationHelper());
+            _reservationController = new ReservationController(GetRoomRepository(), GetTamagotchiRepository(), new Models.ViewModels.RoomViewModel());
         }
 
         public Hotel_TamagotchiContext GetDBContext()

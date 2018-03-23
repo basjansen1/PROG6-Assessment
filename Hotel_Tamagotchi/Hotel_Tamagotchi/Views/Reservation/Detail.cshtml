@@ -1,4 +1,4 @@
-﻿@model Hotel_Tamagotchi.Helpers.ReservationHelper
+﻿@model Hotel_Tamagotchi.Models.ViewModels.RoomViewModel
 @{
     ViewBag.Title = "Detail";
 }
@@ -6,9 +6,9 @@
 @using (Html.BeginForm())
 {
     <h2>Please check your reservation</h2>
-    <h3>Room number: @Model.SelectedRoom.ID</h3>
-    <h3>Amount of Tamagotchis: @Model.SelectedAmountOfTamagotchis</h3>
-    foreach (var tamagotchi in Model.SelectedTamagotchis)
+    <h3>Room number: @Model.Room.ID</h3>
+    <h3>Amount of Tamagotchis: @Model.AmountOfTamagotchis</h3>
+    foreach (var tamagotchi in Model.Tamagotichis)
     {
         <p>@tamagotchi.Name</p>
     }
