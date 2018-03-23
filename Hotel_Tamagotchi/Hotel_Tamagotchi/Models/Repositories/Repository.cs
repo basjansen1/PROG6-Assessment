@@ -19,5 +19,10 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
             _context.Dispose();
         }
+
+        public void ExcuteDbQuerie(string query)
+        {
+            _context.Database.ExecuteSqlCommand(query);
+        }
     }
 }
