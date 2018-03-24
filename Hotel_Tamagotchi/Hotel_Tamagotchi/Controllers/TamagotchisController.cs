@@ -120,14 +120,5 @@ namespace Hotel_Tamagotchi.Controllers
             _tamagotchiRepository.Delete(tamagotchi);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

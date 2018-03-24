@@ -1,0 +1,37 @@
+﻿@model Hotel_Tamagotchi.Models.ViewModels.RoomViewModel 
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Reservation</h2>
+<h2>Step 1</h2>
+<p>Please select the amount of tamagotchis you would like to join the room:</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Room.ID)
+    @Html.HiddenFor(model => model.Room.Size)
+    @Html.HiddenFor(model => model.Room.Type)
+
+    <div class="col-md-10">
+        @Html.DropDownListFor(Model => Model.AmountOfTamagotchis, new SelectList(Model.AmountOfTamagotchisOptions), "Select amount")
+        @Html.ValidationMessageFor(Model => Model.AmountOfTamagotchis, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <h2>Step 2</h2>
+    <p>Please select the Tamagotchis you would like to join the room</p>
+
+    <select multiple="multiple" name="SelectedTamagotchisIDList" class="productSelect">
+        @foreach (var tamagotchi in Model.Tamagotichis)
+        {
+            <option value="@tamagotchi.ID">@tamagotchi.Name</option>
+        }
+    </select>
+    @Html.ValidationMessageFor(Model => Model.Tamagotichis, "", new { @class = "text-danger"})
+    <br />
+    <input type="submit" value="Next" class="btn-default" />
+}
+

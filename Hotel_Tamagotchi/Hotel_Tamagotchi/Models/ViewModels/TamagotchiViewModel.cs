@@ -85,11 +85,11 @@ namespace Hotel_Tamagotchi.Models.ViewModels
         {
             get
             {
-                return new RoomViewModel (_tamagotchi.CurrentRoom);
+                return new RoomViewModel() { Room = _tamagotchi.CurrentRoom };
             }
             set
             {
-                _tamagotchi.CurrentRoom = value.ToModel();
+                _tamagotchi.CurrentRoom = value.Room;
             }
         }
         public TamagotchiViewModel()

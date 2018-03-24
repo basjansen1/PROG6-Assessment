@@ -24,6 +24,17 @@ namespace Hotel_Tamagotchi.Controllers
             _tamagotchis = _tamagotchiRepository.GetAll();
         }
 
+        [HttpGet]
+        public ActionResult StartNight()
+        {
+            ChangeProperties();
+            UnlinkRooms();
+
+            return RedirectToAction("Index", 
+                        "Tamagotchis",
+                        new {});
+        }
+
         public void ChangeProperties()
         {
             foreach (var t in _tamagotchis)
@@ -98,6 +109,15 @@ namespace Hotel_Tamagotchi.Controllers
                     _tamagotchis[i].Cents -= 20;
                     _tamagotchis[i].Health -= 30;
                 }
+            }
+        }
+
+        private void UnlinkRooms()
+        {
+            foreach (var t in _tamagotchis)
+            {
+                t.CurrentRoom = null;
+                _tamagotchiRepository.Update(t);
             }
         }
     }
