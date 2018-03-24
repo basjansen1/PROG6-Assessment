@@ -170,6 +170,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Kernel.cs" />
+    <Compile Include="Helpers\Validators\RoomValidator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Helpers\ReservationHelper.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
@@ -242,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
