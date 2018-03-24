@@ -16,10 +16,11 @@ namespace TamagotchiTest
         [TestMethod]
         public void TestMethod1()
         {
-            IRoomRepository roomRepository = new RoomRepository();
-            ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository();
+            Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
+            IRoomRepository roomRepository = new RoomRepository(context);
+            ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository(context);
 
-            ReservationController reservationController = new ReservationController(null, null, null);
+            ReservationController reservationController = new ReservationController(roomRepository, tamagotchiRepository, new RoomViewModel());
 
             // arrange  
             RoomViewModel roomViewModel = new RoomViewModel();

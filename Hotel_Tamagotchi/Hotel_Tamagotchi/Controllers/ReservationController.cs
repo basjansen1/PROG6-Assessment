@@ -63,11 +63,6 @@ namespace Hotel_Tamagotchi.Controllers
             }
         }
 
-        public bool ValidateReservation(RoomViewModel roomVM)
-        {
-            return true;
-        }
-
         public bool ValidateSelectedAmount(RoomViewModel roomViewModel) // testbaar voor unit test
         {
             if (roomViewModel.AmountOfTamagotchis <= roomViewModel.Room.Size && roomViewModel.AmountOfTamagotchis != 0)
