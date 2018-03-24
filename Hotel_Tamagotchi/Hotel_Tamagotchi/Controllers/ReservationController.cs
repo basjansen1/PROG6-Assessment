@@ -28,7 +28,7 @@ namespace Hotel_Tamagotchi.Controllers
             this._detailsRoomVM = detailsRoomVM;
         }
 
-        // GET: Reservation
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_roomRepository.GetAll());
