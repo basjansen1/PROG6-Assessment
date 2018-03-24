@@ -19,7 +19,7 @@ namespace TamagotchiTest
             IRoomRepository roomRepository = new RoomRepository();
             ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository();
 
-            ReservationController reservationController = new ReservationController();
+            ReservationController reservationController = new ReservationController(null, null, null);
 
             // arrange  
             RoomViewModel roomViewModel = new RoomViewModel();
@@ -29,11 +29,10 @@ namespace TamagotchiTest
             roomViewModel.Room = room;
 
             // act  
-            
+            bool result = reservationController.ValidateSelectedAmount(roomViewModel);
 
             // assert  
-            double actual = account.Balance;
-            Assert.AreEqual(expected, actual, 0.001, "Account not debited correctly");
+            Assert.IsTrue(result);
         }
 
         private TestContext testContextInstance;
