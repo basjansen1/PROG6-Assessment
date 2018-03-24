@@ -13,11 +13,12 @@ namespace Hotel_Tamagotchi
     {
         protected void Application_Start()
         {
+            NinjectControllerFactory ninjectControllerFactory = new NinjectControllerFactory();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ControllerBuilder.Current.SetControllerFactory(typeof(NinjectControllerFactory));
+            ControllerBuilder.Current.SetControllerFactory(ninjectControllerFactory);
         }
     }
 }
