@@ -169,9 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Kernel.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Helpers\ReservationHelper.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />
     <Compile Include="Models\Repositories\IRoomRepository.cs" />

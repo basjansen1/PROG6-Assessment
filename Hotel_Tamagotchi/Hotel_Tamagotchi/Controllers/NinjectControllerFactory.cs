@@ -1,5 +1,4 @@
-﻿using Hotel_Tamagotchi.Helpers;
-using Hotel_Tamagotchi.Models;
+﻿using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Hotel_Tamagotchi.Models.ViewModels;
 using Ninject;
