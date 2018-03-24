@@ -35,6 +35,7 @@ namespace Hotel_Tamagotchi.Controllers
             _kernel.Bind<IController>().To<RoomsController>();
             _kernel.Bind<IController>().To<TamagotchisController>();
             _kernel.Bind<IController>().To<ReservationController>();
+            _kernel.Bind<IController>().To<NightController>();
         }
 
         public IController CreateController(RequestContext requestContext, string controllerName)
@@ -47,6 +48,8 @@ namespace Hotel_Tamagotchi.Controllers
                     return _kernel.Get<RoomsController>();
                 case "Reservation":
                     return _kernel.Get<ReservationController>();
+                case "Night":
+                    return _kernel.Get<NightController>();
                 default:
                     return _kernel.Get<TamagotchisController>();
             }

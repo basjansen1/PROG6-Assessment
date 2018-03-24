@@ -27,12 +27,15 @@ namespace Hotel_Tamagotchi.Models
         [Required]
         public bool Alive { get; set; }
         public Room CurrentRoom { get; set; }
+        [Required]
+        public int Level { get; set; }
 
         public Tamagotchi()
         {
             Age = 0;
             Cents = 100;
             Boredom = 0;
+            Level = 0;
         }
     }
 }

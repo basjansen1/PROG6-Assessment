@@ -12,10 +12,12 @@ namespace TamagotchiTests
     [TestClass]
     public class UnitTest1
     {
+        Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
+
         [TestMethod]
         public void ValidateSelectedAmount()
         {
-            Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
+            //Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
             IRoomRepository roomRepository = new RoomRepository(context);
             ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository(context);
 
@@ -38,7 +40,7 @@ namespace TamagotchiTests
         [TestMethod]
         public void ValidateSelectedTamagotchis()
         {
-            Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
+            //Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
             IRoomRepository roomRepository = new RoomRepository(context);
             ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository(context);
 
@@ -59,6 +61,34 @@ namespace TamagotchiTests
 
             // assert  
             Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void UnlinkRooms()
+        {
+            //Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
+            ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository(context);
+            Tamagotchi tamagotchi = new Tamagotchi();
+            Room room = new Room();
+
+            room.Type = "ChillRoom";
+
+            tamagotchi.Alive = true;
+            tamagotchi.ID = 1;
+            tamagotchi.Boredom = 20;
+            tamagotchi.Health = 50;
+            tamagotchi.Level = 1;
+            tamagotchi.CurrentRoom = room;
+
+            int expectedHealth = 70;
+
+            List<Tamagotchi> tamagotchis = new List<Tamagotchi>();
+            tamagotchis.Add(tamagotchi);
+
+            NightValidator.UnlinkRooms(tamagotchis, tamagotchiRepository);
+
+            int actualHealth = tamagotchis[0].Health;
+
+            Assert.AreEqual(expectedHealth, actualHealth, "Health not correct");
         }
     }
 }
