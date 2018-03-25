@@ -26,32 +26,14 @@ namespace Hotel_Tamagotchi.Models.Repositories
                 ID = 2,
                 Health = 30,
                 Alive = true,
-                Boredom = 40,
-                CurrentRoom = new Room() { Type = "Fightroom" }
+                Boredom = 40
             });
             _tamagotchis.Add(new Tamagotchi()
             {
                 ID = 3,
                 Health = 50,
                 Alive = true,
-                Boredom = 0,
-                CurrentRoom = new Room() { Type = "Gameroom" }
-            });
-            _tamagotchis.Add(new Tamagotchi()
-            {
-                ID = 3,
-                Health = 50,
-                Alive = true,
-                Boredom = 0,
-                CurrentRoom = new Room() { Type = "Workroom" }
-            });
-            _tamagotchis.Add(new Tamagotchi()
-            {
-                ID = 3,
-                Health = 50,
-                Alive = true,
-                Boredom = 0,
-                CurrentRoom = new Room() { Type = "DateRoom" }
+                Boredom = 0
             });
         }
         public Tamagotchi Add(Tamagotchi model)

@@ -7,7 +7,6 @@ using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Hotel_Tamagotchi.Models.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace TamagotchiTests
 {
@@ -230,14 +229,5 @@ namespace TamagotchiTests
             Assert.AreEqual(expectedHealth, realHealth);
         }
 
-        //[TestMethod]
-        //public void TestTest()
-        //{
-        //    // arrange
-        //    Mock<ITamagotchiRepository> repo = new Mock<ITamagotchiRepository>();
-        //    // act 
-        //    //assert
-        //    repo.Verify(s => s.Add(null), Times.AtMostOnce());
-        //}
     }
 }
