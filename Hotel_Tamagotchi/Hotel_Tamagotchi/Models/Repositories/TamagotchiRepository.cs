@@ -14,10 +14,11 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
         }
 
-        public void Add(Tamagotchi tamagotchi)
+        public Tamagotchi Add(Tamagotchi tamagotchi)
         {
             this._context.Tamagotchis.Add(tamagotchi);
             this._context.SaveChanges();
+            return tamagotchi;
         }
 
         public void Delete(Tamagotchi tamagotchi)

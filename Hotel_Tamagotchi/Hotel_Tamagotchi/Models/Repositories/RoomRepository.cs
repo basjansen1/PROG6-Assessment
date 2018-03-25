@@ -14,10 +14,11 @@ namespace Hotel_Tamagotchi.Models.Repositories
         {
         }
 
-        public void Add(Room room)
+        public Room Add(Room room)
         {
             this._context.Rooms.Add(room);
             this._context.SaveChanges();
+            return room;
         }
 
         public void Delete(Room room)

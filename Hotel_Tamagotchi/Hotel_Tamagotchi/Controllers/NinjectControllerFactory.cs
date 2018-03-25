@@ -1,5 +1,4 @@
-﻿using Hotel_Tamagotchi.Helpers;
-using Hotel_Tamagotchi.Models;
+﻿using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Hotel_Tamagotchi.Models.ViewModels;
 using Ninject;
@@ -32,7 +31,6 @@ namespace Hotel_Tamagotchi.Controllers
             _kernel.Bind<RoomViewModel>().ToSelf().InSingletonScope();
 
             // Binding controllers
-            _kernel.Bind<IController>().To<HomeController>();
             _kernel.Bind<IController>().To<RoomsController>();
             _kernel.Bind<IController>().To<TamagotchisController>();
             _kernel.Bind<IController>().To<ReservationController>();

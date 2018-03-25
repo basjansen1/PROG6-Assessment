@@ -10,7 +10,7 @@ namespace Hotel_Tamagotchi.Models.Repositories
     {
         T Get(int id);
         List<T> GetAll();
-        void Add(T model);
+        T Add(T model);
         void Update(T model);
         void Delete(T model);
     }
