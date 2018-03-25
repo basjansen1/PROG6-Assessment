@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Helpers\Validators\NightValidator.cs" />
     <Compile Include="Helpers\Validators\ReservationValidator.cs" />
+    <Compile Include="Helpers\Validators\RoomValidator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />
@@ -244,7 +245,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Night\" />
-    <Folder Include="Helpers\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

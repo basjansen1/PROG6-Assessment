@@ -1,5 +1,6 @@
 namespace Hotel_Tamagotchi.Migrations
 {
+    using Hotel_Tamagotchi.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,6 +28,11 @@ namespace Hotel_Tamagotchi.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Rooms.AddOrUpdate(r => r.ID, new Room { ID = 1, Size = 2, Type = RoomType.Chillroom.ToString()});
+            context.Rooms.AddOrUpdate(r => r.ID, new Room { ID = 2, Size = 3, Type = RoomType.Fightroom.ToString() });
+            context.Rooms.AddOrUpdate(r => r.ID, new Room { ID = 3, Size = 5, Type = RoomType.Gameroom.ToString() });
+            context.Rooms.AddOrUpdate(r => r.ID, new Room { ID = 4, Size = 5, Type = RoomType.Workroom.ToString() });
+
         }
     }
 }
