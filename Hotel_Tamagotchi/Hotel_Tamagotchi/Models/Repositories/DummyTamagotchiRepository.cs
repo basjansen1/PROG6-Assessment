@@ -65,9 +65,10 @@ namespace Hotel_Tamagotchi.Models.Repositories
 
         public void Update(Tamagotchi model)
         {
-            int id = model.ID;
-
-            _tamagotchis[id] = model;
+            Tamagotchi tamagotchi = _tamagotchis.Find(t => t.ID == model.ID);
+            tamagotchi.Health = model.Health;
+            tamagotchi.Name = model.Name;
+            tamagotchi.Level = model.Level;
         }
     }
 }
