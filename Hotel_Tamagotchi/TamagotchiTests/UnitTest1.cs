@@ -7,6 +7,7 @@ using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
 using Hotel_Tamagotchi.Models.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace TamagotchiTests
 {
@@ -116,10 +117,10 @@ namespace TamagotchiTests
             Assert.AreEqual(expectedId, room.ID);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void CheckRoom()
         {
-            IRoomRepository roomRepository = new RoomRepository(context);
+            IRoomRepository roomRepository = new DummyRoomRepository();
             roomRepository.Add(new Room());
             roomRepository.Add(new Room());
             roomRepository.Add(new Room());
@@ -229,5 +230,74 @@ namespace TamagotchiTests
             Assert.AreEqual(expectedHealth, realHealth);
         }
 
+        [TestMethod]
+        public void DeleteRoom()
+        {
+            IRoomRepository dummy = new DummyRoomRepository();
+
+            Room room = new Room();
+            room.ID = 66;
+            room.Size = 5;
+            room.Type = "Chillroom";
+
+            int expectedCount = dummy.GetAll().Count;
+
+            dummy.Add(room);
+            dummy.Delete(room);
+
+            Assert.AreEqual(expectedCount, dummy.GetAll().Count);
+        }
+
+        [TestMethod]
+        public void GetRoomId()
+        {
+            IRoomRepository dummy = new DummyRoomRepository();
+
+            int expectedId = 1;
+
+            var result = dummy.Get(0) as Room;
+
+            Assert.AreEqual(expectedId, result.ID);
+        }
+
+        [TestMethod]
+        public void ValidateRoomType()
+        {
+            Tamagotchi tama = new Tamagotchi();
+            Room room = new Room();
+            room.Type = "Chillroom";
+            tama.CurrentRoom = room;
+
+            var expectedResult = "Chillroom";
+
+            Assert.AreEqual(expectedResult, tama.CurrentRoom.Type);
+        }
+
+        [TestMethod]
+        public void GetTamagotchis()
+        {
+            RoomViewModel room = new RoomViewModel();
+            List<Tamagotchi> tamagotchis = new List<Tamagotchi>();
+            tamagotchis.Add(new Tamagotchi());
+            room.Tamagotichis = tamagotchis;
+
+            Assert.IsNotNull(room.Tamagotichis);
+        }
+
+        [TestMethod]
+        public void CheckAmountOfTamagotchis()
+        {
+            RoomViewModel room = new RoomViewModel();
+            List<int> options = new List<int>();
+            options.Add(1);
+            options.Add(2);
+            options.Add(3);
+
+            room.AmountOfTamagotchisOptions = options;
+
+            int expectedCount = 3;
+
+            Assert.AreEqual(expectedCount, room.AmountOfTamagotchisOptions.Count);
+        }
     }
 }
