@@ -170,6 +170,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NightHelper.cs" />
     <Compile Include="Helpers\Validators\NightValidator.cs" />
     <Compile Include="Helpers\Validators\ReservationValidator.cs" />
     <Compile Include="Helpers\Validators\RoomValidator.cs" />

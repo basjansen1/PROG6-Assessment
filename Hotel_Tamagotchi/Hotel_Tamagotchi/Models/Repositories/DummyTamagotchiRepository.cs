@@ -18,7 +18,8 @@ namespace Hotel_Tamagotchi.Models.Repositories
                 ID = 1,
                 Health = 30,
                 Alive = true,
-                Boredom = 20
+                Boredom = 20,
+                CurrentRoom = new Room() { Type = "Chillroom"}
             });
             _tamagotchis.Add(new Tamagotchi()
             {
@@ -64,7 +65,9 @@ namespace Hotel_Tamagotchi.Models.Repositories
 
         public void Update(Tamagotchi model)
         {
-            throw new NotImplementedException();
+            int id = model.ID;
+
+            _tamagotchis[id] = model;
         }
     }
 }

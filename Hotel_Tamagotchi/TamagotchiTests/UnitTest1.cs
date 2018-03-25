@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Hotel_Tamagotchi.Controllers;
+using Hotel_Tamagotchi.Helpers;
 using Hotel_Tamagotchi.Helpers.Validators;
 using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
@@ -63,11 +64,10 @@ namespace TamagotchiTests
             Assert.IsTrue(result);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void UnlinkRooms()
         {
-            //Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
-            ITamagotchiRepository tamagotchiRepository = new TamagotchiRepository(context);
+            ITamagotchiRepository tamagotchiRepository = new DummyTamagotchiRepository();
             Tamagotchi tamagotchi = new Tamagotchi();
             Room room = new Room();
 
@@ -80,16 +80,14 @@ namespace TamagotchiTests
             tamagotchi.Level = 1;
             tamagotchi.CurrentRoom = room;
 
-            int expectedHealth = 70;
-
             List<Tamagotchi> tamagotchis = new List<Tamagotchi>();
             tamagotchis.Add(tamagotchi);
 
             NightValidator.UnlinkRooms(tamagotchis, tamagotchiRepository);
 
-            int actualHealth = tamagotchis[0].Health;
+            var tamagotchisResult = tamagotchiRepository.GetAll();
 
-            Assert.AreEqual(expectedHealth, actualHealth, "Health not correct");
+            Assert.IsNull(tamagotchisResult[1].CurrentRoom);
         }
 
         [TestMethod]
@@ -216,6 +214,19 @@ namespace TamagotchiTests
             int result = dummy.GetAll().Count;
 
             Assert.AreEqual(expectedItemsInList, result);
+        }
+
+        [TestMethod]
+        public void CheckChangeProperties()
+        {
+            ITamagotchiRepository dummy = new DummyTamagotchiRepository();
+
+            NightHelper.ChangeProperties(dummy);
+
+            int expectedHealth = 50;
+            var realHealth = dummy.Get(0).Health;
+
+            Assert.AreEqual(expectedHealth, realHealth);
         }
 
     }
