@@ -63,7 +63,7 @@ namespace TamagotchiTests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void UnlinkRooms()
         {
             //Hotel_TamagotchiContext context = new Hotel_TamagotchiContext();
@@ -92,6 +92,131 @@ namespace TamagotchiTests
             Assert.AreEqual(expectedHealth, actualHealth, "Health not correct");
         }
 
-        
+        [TestMethod]
+        public void CheckSizeTamagotchiList()
+        {
+            Room room = new Room();
+            List<Tamagotchi> tamagotchis = new List<Tamagotchi>();
+            tamagotchis.Add(new Tamagotchi());
+            room.Size = 3;
+            room.TamagotchiList = tamagotchis;
+
+            Assert.IsNotNull(room.TamagotchiList);
+        }
+
+        [TestMethod]
+        public void CheckPrimaryId()
+        {
+            Room room = new Room();
+            List<Tamagotchi> tamagotchis = new List<Tamagotchi>();
+            tamagotchis.Add(new Tamagotchi());
+            room.ID = 7;
+            room.TamagotchiList = tamagotchis;
+
+            int expectedId = 7;
+
+            Assert.AreEqual(expectedId, room.ID);
+        }
+
+        //[TestMethod]
+        public void CheckRoom()
+        {
+            IRoomRepository roomRepository = new RoomRepository(context);
+            roomRepository.Add(new Room());
+            roomRepository.Add(new Room());
+            roomRepository.Add(new Room());
+            roomRepository.Add(new Room());
+            roomRepository.Add(new Room());
+
+            bool result = RoomValidator.CanDelete(roomRepository);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void AddTamagotchi()
+        {
+            ITamagotchiRepository dummy = new DummyTamagotchiRepository();
+            Tamagotchi tamagotchi = new Tamagotchi();
+            tamagotchi.Alive = true;
+            tamagotchi.ID = 8;
+            tamagotchi.Boredom = 20;
+            tamagotchi.Health = 50;
+            tamagotchi.Level = 1;
+
+            var result = dummy.Add(tamagotchi);
+
+            Assert.AreEqual(tamagotchi, result);
+        }
+
+        [TestMethod]
+        public void CountElements()
+        {
+            ITamagotchiRepository dummy = new DummyTamagotchiRepository();
+
+            int expectedItemsInList = 3;
+
+            int result = dummy.GetAll().Count;
+
+            Assert.AreEqual(expectedItemsInList, result);
+        }
+
+        [TestMethod]
+        public void GetTamagotchiId()
+        {
+            ITamagotchiRepository dummy = new DummyTamagotchiRepository();
+
+            int expectedId = 1;
+
+            var result = dummy.Get(0) as Tamagotchi;
+
+            Assert.AreEqual(expectedId, result.ID);
+        }
+
+        [TestMethod]
+        public void DeleteTamagotchi()
+        {
+            ITamagotchiRepository dummy = new DummyTamagotchiRepository();
+
+            Tamagotchi tamagotchi = new Tamagotchi();
+            tamagotchi.Alive = true;
+            tamagotchi.ID = 10;
+            tamagotchi.Boredom = 20;
+            tamagotchi.Health = 50;
+            tamagotchi.Level = 1;
+
+            int expectedCount = dummy.GetAll().Count;
+
+            dummy.Add(tamagotchi);
+            dummy.Delete(tamagotchi);
+
+            Assert.AreEqual(expectedCount, dummy.GetAll().Count);
+        }
+
+        [TestMethod]
+        public void AddRoom()
+        {
+            IRoomRepository dummy = new DummyRoomRepository();
+            Room room = new Room();
+            room.ID = 10;
+            room.Size = 3;
+
+            var result = dummy.Add(room);
+
+            Assert.AreEqual(room, result);
+        }
+
+        [TestMethod]
+        public void CountRoomElements()
+        {
+            IRoomRepository dummy = new DummyRoomRepository();
+
+            int expectedItemsInList = 2;
+
+            int result = dummy.GetAll().Count;
+
+            Assert.AreEqual(expectedItemsInList, result);
+        }
+
     }
 }

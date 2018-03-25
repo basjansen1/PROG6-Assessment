@@ -175,6 +175,8 @@
     <Compile Include="Helpers\Validators\RoomValidator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
+    <Compile Include="Models\Repositories\DummyRoomRepository.cs" />
+    <Compile Include="Models\Repositories\DummyTamagotchiRepository.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />
     <Compile Include="Models\Repositories\IRoomRepository.cs" />
     <Compile Include="Models\Repositories\ITamagotchiRepository.cs" />
