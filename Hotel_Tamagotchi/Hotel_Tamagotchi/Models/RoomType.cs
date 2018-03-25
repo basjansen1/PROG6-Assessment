@@ -7,6 +7,6 @@ namespace Hotel_Tamagotchi.Models
 {
     public enum RoomType
     {
-        Chillroom, Fightroom, Gameroom, Workroom
+        Chillroom, Fightroom, Gameroom, Workroom, DateRoom
     }
 }
