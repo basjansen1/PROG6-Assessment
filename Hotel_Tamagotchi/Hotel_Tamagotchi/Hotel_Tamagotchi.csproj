@@ -172,6 +172,8 @@
     </Compile>
     <Compile Include="Helpers\Validators\NightValidator.cs" />
     <Compile Include="Helpers\Validators\ReservationValidator.cs" />
+    <Compile Include="Helpers\Kernel.cs" />
+    <Compile Include="Helpers\Validators\RoomValidator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Hotel_TamagotchiContext.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />

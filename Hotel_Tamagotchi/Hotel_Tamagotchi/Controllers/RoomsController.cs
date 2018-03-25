@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Hotel_Tamagotchi.Models;
 using Hotel_Tamagotchi.Models.Repositories;
+using Hotel_Tamagotchi.Helpers.Validators;
 
 namespace Hotel_Tamagotchi.Controllers
 {
@@ -106,10 +107,11 @@ namespace Hotel_Tamagotchi.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Room room = _roomRepository.Get((int) id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
+            
+                if (room == null)
+                {
+                    return HttpNotFound();
+                }
             return View(room);
         }
 
@@ -119,7 +121,16 @@ namespace Hotel_Tamagotchi.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Room room = _roomRepository.Get(id);
-            _roomRepository.Delete(room);
+            if (!RoomValidator.CanDelete(_roomRepository))
+            {
+                ModelState.AddModelError("", "Deleting is not possible because you cannot have less than 4 rooms in your hotel");
+            }
+            if (ModelState.IsValid)
+            {
+                _roomRepository.Delete(room);
+                return View(room);
+
+            }
             return RedirectToAction("Index");
         }
     }
