@@ -161,7 +161,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NightController.cs" />
     <Compile Include="Controllers\NinjectControllerFactory.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
@@ -191,7 +190,6 @@
     <Compile Include="Models\ValidationAttributes\AgeValidator.cs" />
     <Compile Include="Models\ValidationAttributes\RoomSizeValidator.cs" />
     <Compile Include="Models\ViewModels\RoomViewModel.cs" />
-    <Compile Include="Models\ViewModels\TamagotchiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +226,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Tamagotchis\Create.cshtml" />
     <Content Include="Views\Tamagotchis\Delete.cshtml" />
     <Content Include="Views\Tamagotchis\Details.cshtml" />
