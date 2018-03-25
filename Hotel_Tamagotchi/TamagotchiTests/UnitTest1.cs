@@ -88,7 +88,7 @@ namespace TamagotchiTests
 
             var tamagotchisResult = tamagotchiRepository.GetAll();
 
-            Assert.IsNull(tamagotchisResult[1].CurrentRoom);
+            Assert.IsNull(tamagotchisResult[4].CurrentRoom);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace TamagotchiTests
         {
             ITamagotchiRepository dummy = new DummyTamagotchiRepository();
 
-            int expectedItemsInList = 3;
+            int expectedItemsInList = 5;
 
             int result = dummy.GetAll().Count;
 
