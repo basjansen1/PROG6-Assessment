@@ -62,6 +62,7 @@ namespace TamagotchiTests
             // assert  
             Assert.IsTrue(result);
         }
+
         [TestMethod]
         public void UnlinkRooms()
         {
@@ -90,5 +91,7 @@ namespace TamagotchiTests
 
             Assert.AreEqual(expectedHealth, actualHealth, "Health not correct");
         }
+
+        
     }
 }
