@@ -26,11 +26,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Alive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Alive)
-                    @Html.ValidationMessageFor(model => model.Alive, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <dl class="dl-horizontal">
+                    <dd>
+                        @Html.DisplayFor(model => model.Alive)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Level)
+                    </dt>
+               </dl>
+</div>
         </div>
 
         <div class="form-group">

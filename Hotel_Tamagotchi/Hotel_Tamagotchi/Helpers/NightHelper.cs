@@ -60,8 +60,20 @@ namespace Hotel_Tamagotchi.Helpers
 
                 if (t.Health > 100)
                     t.Health = 100;
+                else if (t.Health < 0)
+                    t.Health = 0;
+                if (t.Boredom < 0)
+                    t.Boredom = 0;
                 if (t.Boredom > 100)
                     t.Boredom = 100;
+                if (t.Cents < 0) 
+                {
+                    t.Cents = 0;
+                }
+                else if (t.Cents > 100)
+                {
+                    t.Cents = 100;
+                }
 
                 tamagotchiRepository.Update(t);
             }

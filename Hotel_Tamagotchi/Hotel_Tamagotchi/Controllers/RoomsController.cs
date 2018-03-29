@@ -128,10 +128,10 @@ namespace Hotel_Tamagotchi.Controllers
             if (ModelState.IsValid)
             {
                 _roomRepository.Delete(room);
-                return View(room);
+                return RedirectToAction("Index");
 
             }
-            return RedirectToAction("Index");
+            return View(room);
         }
     }
 }

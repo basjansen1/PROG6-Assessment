@@ -36,6 +36,8 @@ namespace Hotel_Tamagotchi.Models
             Cents = 100;
             Boredom = 0;
             Level = 0;
+            Alive = true;
+            Health = 100;
         }
     }
 }
