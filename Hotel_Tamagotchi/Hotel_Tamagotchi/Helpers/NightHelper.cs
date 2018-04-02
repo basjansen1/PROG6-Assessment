@@ -11,8 +11,18 @@ namespace Hotel_Tamagotchi.Helpers
     {
         public static void ChangeProperties(ITamagotchiRepository tamagotchiRepository)
         {
-            List<Tamagotchi> tamagotichiList = tamagotchiRepository.GetAll().Where(t => t.CurrentRoom != null).ToList();
+            foreach (var t in tamagotchiRepository.GetAll())
+            {
+                // Standaard mutaties
+                t.Level++;
+                if (t.Boredom >= 70)
+                    t.Health -= 20;
 
+                if (t.Health <= 0)
+                    t.Alive = false;
+            }
+            // mutaties per kamer
+            List<Tamagotchi> tamagotichiList = tamagotchiRepository.GetAll().Where(t => t.CurrentRoom != null).ToList();
             ProcessChillRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Chillroom.ToString()).ToList());
             ProcessGameRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Gameroom.ToString()).ToList());
             ProcessWorkRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Workroom.ToString()).ToList());
@@ -22,34 +32,40 @@ namespace Hotel_Tamagotchi.Helpers
 
             foreach (var t in tamagotchiRepository.GetAll())
             {
-                t.Level++;
-
-                // Standaard mutaties
-                if (t.Boredom >= 70)
-                    t.Health -= 20;
-
-                if (t.Health <= 0)
-                    t.Alive = false;
-                
                 // check for propertie errors
-                if (t.Health > 100)
-                    t.Health = 100;
-                else if (t.Health < 0)
-                    t.Health = 0;
-                if (t.Boredom < 0)
-                    t.Boredom = 0;
-                if (t.Boredom > 100)
-                    t.Boredom = 100;
-                if (t.Cents < 0) 
-                {
-                    t.Cents = 0;
-                }
-                else if (t.Cents > 100)
-                {
-                    t.Cents = 100;
-                }
-
+                CheckPropertieErrors(t);
+                // update tamagotchis
                 tamagotchiRepository.Update(t);
+            }
+        }
+
+        private static void CheckPropertieErrors(Tamagotchi t)
+        {
+            if (t.Health > 100)
+            {
+                t.Health = 100;
+            }
+            else if (t.Health < 0)
+            {
+                t.Health = 0;
+            }
+
+            if (t.Boredom < 0)
+            {
+                t.Boredom = 0;
+            }
+            else if (t.Boredom > 100)
+            {
+                t.Boredom = 100;
+            }
+                
+            if (t.Cents < 0)
+            {
+                t.Cents = 0;
+            }
+            else if (t.Cents > 100)
+            {
+                t.Cents = 100;
             }
         }
 
@@ -118,6 +134,21 @@ namespace Hotel_Tamagotchi.Helpers
                 t.Health -= 20;
                 t.Boredom += 20;
             }
+        }
+
+        private static void EditCents(Tamagotchi t)
+        {
+
+        }
+
+        private static void EditHealt(Tamagotchi t)
+        {
+
+        }
+
+        private static void EditBoredom(Tamagotchi t)
+        {
+
         }
     }
 }
