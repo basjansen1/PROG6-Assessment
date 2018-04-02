@@ -67,7 +67,7 @@ namespace Hotel_Tamagotchi.Helpers
         {
             foreach(Tamagotchi t in tamagotchis.Where(t => t.CurrentRoom.Type == RoomType.Gameroom.ToString()))
             {
-                t.Cents -= 10;
+                t.Cents -= 20;
                 t.Boredom = 0;
             }
         }
