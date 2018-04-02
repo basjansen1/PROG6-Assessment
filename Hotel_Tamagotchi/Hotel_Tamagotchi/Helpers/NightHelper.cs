@@ -11,6 +11,15 @@ namespace Hotel_Tamagotchi.Helpers
     {
         public static void ChangeProperties(ITamagotchiRepository tamagotchiRepository)
         {
+            List<Tamagotchi> tamagotichiList = tamagotchiRepository.GetAll().Where(t => t.CurrentRoom != null).ToList();
+
+            ProcessChillRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Chillroom.ToString()).ToList());
+            ProcessGameRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Gameroom.ToString()).ToList());
+            ProcessWorkRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Workroom.ToString()).ToList());
+            ProcessFightRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.Fightroom.ToString()).ToList());
+            ProcessDateRoom(tamagotichiList.Where(t => t.CurrentRoom.Type == RoomType.DateRoom.ToString()).ToList());
+            ProcessNoRoom(tamagotchiRepository.GetAll().Where(t => t.CurrentRoom == null).ToList());
+
             foreach (var t in tamagotchiRepository.GetAll())
             {
                 t.Level++;
@@ -21,43 +30,8 @@ namespace Hotel_Tamagotchi.Helpers
 
                 if (t.Health <= 0)
                     t.Alive = false;
-
-                if (t.CurrentRoom != null)
-                {
-                    // Kamer afhankelijke mutaties
-                    switch (t.CurrentRoom.Type)
-                    {
-                        case "Chillroom":
-                            t.Cents -= 10;
-                            t.Health += 20;
-                            t.Boredom += 10;
-                            break;
-                        case "Gameroom":
-                            t.Cents -= 10;
-                            t.Boredom = 0;
-                            break;
-                        case "Workroom":
-                            Random r = new Random();
-                            int amountEarned = r.Next(10, 60);
-                            t.Cents += amountEarned;
-                            t.Boredom += 20;
-                            break;
-                        case "Fightroom":
-                            PickRandomWinner(tamagotchiRepository.GetAll());
-                            break;
-                        case "DateRoom":
-                            t.Cents -= 10;
-                            t.Boredom -= 30;
-                            t.Health += 10;
-                            break;
-                        default:
-                            // Geen kamer
-                            t.Health -= 20;
-                            t.Boredom += 20;
-                            break;
-                    }
-                }
-
+                
+                // check for propertie errors
                 if (t.Health > 100)
                     t.Health = 100;
                 else if (t.Health < 0)
@@ -79,11 +53,37 @@ namespace Hotel_Tamagotchi.Helpers
             }
         }
 
-        /// <summary>
-        /// Picks a random winner. 
-        /// </summary>
-        /// <returns></returns>
-        private static void PickRandomWinner(List<Tamagotchi> tamagotchis)
+        private static void ProcessChillRoom(List<Tamagotchi> tamagotchis)
+        {
+            foreach(Tamagotchi t in tamagotchis.Where(t => t.CurrentRoom.Type == RoomType.Chillroom.ToString()))
+            {
+                t.Cents -= 10;
+                t.Health += 20;
+                t.Boredom += 10;
+            }
+        }
+
+        private static void ProcessGameRoom(List<Tamagotchi> tamagotchis)
+        {
+            foreach(Tamagotchi t in tamagotchis.Where(t => t.CurrentRoom.Type == RoomType.Gameroom.ToString()))
+            {
+                t.Cents -= 10;
+                t.Boredom = 0;
+            }
+        }
+
+        private static void ProcessWorkRoom(List<Tamagotchi> tamagotchis)
+        {
+            foreach (Tamagotchi t in tamagotchis.Where(t => t.CurrentRoom.Type == RoomType.Workroom.ToString()))
+            {
+                Random r = new Random();
+                int amountEarned = r.Next(10, 60);
+                t.Cents += amountEarned;
+                t.Boredom += 20;
+            }
+        }
+
+        private static void ProcessFightRoom(List<Tamagotchi> tamagotchis)
         {
             Random r = new Random();
             int randomWinner = r.Next(tamagotchis.Count());
@@ -98,6 +98,25 @@ namespace Hotel_Tamagotchi.Helpers
                     tamagotchis[i].Cents -= 20;
                     tamagotchis[i].Health -= 30;
                 }
+            }
+        }
+
+        private static void ProcessDateRoom(List<Tamagotchi> tamagotchis)
+        {
+            foreach (Tamagotchi t in tamagotchis.Where(t => t.CurrentRoom.Type == RoomType.DateRoom.ToString()))
+            {
+                t.Cents -= 10;
+                t.Boredom -= 30;
+                t.Health += 10;
+            }
+        }
+
+        private static void ProcessNoRoom(List<Tamagotchi> tamagotchis)
+        {
+            foreach(Tamagotchi t in tamagotchis)
+            {
+                t.Health -= 20;
+                t.Boredom += 20;
             }
         }
     }
