@@ -69,18 +69,21 @@ namespace Hotel_Tamagotchi.Helpers
 
         private static void ProcessFightRoom(List<Tamagotchi> tamagotchis)
         {
-            Random r = new Random();
-            int randomWinner = r.Next(tamagotchis.Count());
-
-            EditCents(tamagotchis[randomWinner], 20 * tamagotchis.Count() - 1);
-            tamagotchis[randomWinner].Level += 1;
-
-            for (int i = 0; i < tamagotchis.Count; i++)
+            if (tamagotchis.Count() != 0)
             {
-                if (i != randomWinner)
+                Random r = new Random();
+                int randomWinner = r.Next(tamagotchis.Count());
+
+                EditCents(tamagotchis[randomWinner], 20 * tamagotchis.Count() - 1);
+                tamagotchis[randomWinner].Level += 1;
+
+                for (int i = 0; i < tamagotchis.Count; i++)
                 {
-                    EditCents(tamagotchis[i], -20);
-                    EditHealt(tamagotchis[i], -30);
+                    if (i != randomWinner)
+                    {
+                        EditCents(tamagotchis[i], -20);
+                        EditHealt(tamagotchis[i], -30);
+                    }
                 }
             }
         }
