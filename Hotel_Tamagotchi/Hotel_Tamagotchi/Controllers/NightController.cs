@@ -41,5 +41,6 @@ namespace Hotel_Tamagotchi.Controllers
         public void ChangeProperties()
         {
             NightHelper.ChangeProperties(_tamagotchiRepository);
+        }
     }
 }
